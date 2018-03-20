@@ -51,8 +51,9 @@ public interface CentralProcessor extends Serializable {
         }
 
         /**
-         * @return The integer index of this ENUM in the processor tick arrays,
-         *         which matches the output of Linux /proc/cpuinfo
+         * @return Целочисленный индекс этого ENUM в массивах тиков процессора,
+         *, который соответствует выводам Linux / proc / cpuinfo
+         * /
          */
         public int getIndex() {
             return index;
@@ -107,134 +108,126 @@ public interface CentralProcessor extends Serializable {
     void setFamily(String family);
 
     /**
-     * Returns the "recent cpu usage" for the whole system by counting ticks
-     * from {@link #getSystemCpuLoadTicks()} between successive calls of this
-     * method, with a minimum interval slightly less than 1 second. If less than
-     * one second has elapsed since the last call of this method, it will return
-     * a calculation based on the tick counts and times of the previous two
-     * calls. If at least a second has elapsed, it will return the average CPU
-     * load for the interval and update the "last called" times. This method is
-     * intended to be used for periodic polling at intervals of 1 second or
-     * longer.
+     * Возвращает «недавнее использование процессора» для всей системы путем подсчета тиков
+     * из {@link #getSystemCpuLoadTicks ()} между последовательными вызовами этого метода
+     * с минимальным интервалом чуть меньше 1 секунды. Если меньше одной минуты прошло
+     * с момента последнего вызова этого метода, она вернет
+     * расчет, основанный на подсчетах тиков и времени предыдущих двух
+     * вызовов. Если прошло не менее секунды, он вернет среднию загрузка процессора
+     * для интервала и обновит «последние вызванные». Этот метод
+     * предназначен для периодического опроса с интервалом в 1 секунду или
+     * дольше.
      *
-     * @return CPU load between 0 and 1 (100%)
+     * @return  нагрузку процессора между 0 и 1 (100%)
      */
     double getSystemCpuLoadBetweenTicks();
 
     /**
-     * Get System-wide CPU Load tick counters. Returns an array with seven
-     * elements representing either clock ticks or milliseconds (platform
-     * dependent) spent in User (0), Nice (1), System (2), Idle (3), IOwait (4),
-     * Hardware interrupts (IRQ) (5), Software interrupts/DPC (SoftIRQ) (6), or Steal (7)
-     * states. Use {@link TickType#getIndex()} to retrieve the appropriate
-     * index. By measuring the difference between ticks across a time interval,
-     * CPU load over that interval may be calculated.
+     * Вернет системные счетчики загрузки CPU. Возвращает массив с семью
+     * элементами, представляющие либо тики, либо миллисекунды (платформа
+     * зависимый), проведенный в User (0), Nice (1), System (2), Idle (3), IOwait (4),
+     * Аппаратные прерывания (IRQ) (5), Программные прерывания / DPC (SoftIRQ) (6)
+     * состояниях. Используйте {@link TickType # getIndex ()} для получения соответствующего
+     * индекс. Измеряя разницу между тиками по временному интервалу,
+     * Нагрузка процессора на этот интервал может быть рассчитана.
      *
-     * Nice and IOWait information is not available on Windows, and IOwait and
-     * IRQ information is not available on macOS, so these ticks will always be
-     * zero.
+     * Nice и IOWait недоступны в Windows, а IOwait и
+     * Информация IRQ недоступна в macOS, поэтому эти тики всегда будут
+     * нуль.
      *
-     * To calculate overall Idle time using this method, include both Idle and
-     * IOWait ticks. Similarly, IRQ, SoftIRQ, and Steal ticks should be added to the
-     * System value to get the total. System ticks also include time executing
-     * other virtual hosts (steal).
+     * Чтобы рассчитать общее время простоя с помощью этого метода, включите как Idle, так и
+     * IOWait тикает. Аналогично, IRQ, SoftIRQ ticks должны быть добавлены к
+     * Системным значениям, чтобы получить общее количество.
      *
-     * @return An array of 7 long values representing time spent in User, Nice,
-     *         System, Idle, IOwait, IRQ, SoftIRQ, and Steal states.
+     * @return Массив из 7 длинных значений, представляющих время, проведенное в User, Nice,
+     * Система, Idle, IOwait, IRQ, SoftIRQ.
      */
     long[] getSystemCpuLoadTicks();
 
     /**
-     * Returns the "recent cpu usage" for the whole system from
-     * {@link com.sun.management.OperatingSystemMXBean#getSystemCpuLoad()} if a
-     * user is running the Oracle JVM. This value is a double in the [0.0,1.0]
-     * interval. A value of 0.0 means that all CPUs were idle during the recent
-     * period of time observed, while a value of 1.0 means that all CPUs were
-     * actively running 100% of the time during the recent period being
-     * observed. All values between 0.0 and 1.0 are possible depending of the
-     * activities going on in the system. If the system recent cpu usage is not
-     * available, the method returns a negative value. Calling this method
-     * immediately upon instantiating the {@link CentralProcessor} may give
-     * unreliable results. If a user is not running the Oracle JVM, this method
-     * will default to the behavior and return value of
-     * {@link #getSystemCpuLoadBetweenTicks()}.
+     * Возвращает «недавнее использование процессора» для всей системы из
+     * {@link com.sun.management.OperatingSystemMXBean # getSystemCpuLoad ()}, если
+     * Пользователь запускает JVM Oracle. Это значение является двойным в [0.0,1.0]
+     * промежуток. Значение 0.0 означает, что все процессоры неактивны в течение последних
+     * наблюдаемый период времени, а значение 1.0 означает, что все ЦП были
+     * активно работает в 100% случаев за последний период
+     * наблюдаемый. Все значения между 0.0 и 1.0 возможны в зависимости от
+     * действия, происходящие в системе. Если система недавнего использования процессора не
+     * доступно, метод возвращает отрицательное значение. Вызов этого метода
+     * сразу после создания экземпляра {@link CentralProcessor} может дать
+     * ненадежные результаты. Если пользователь не запускает JVM Oracle, этот метод
+     * будет по умолчанию изменено поведение и возвращаемое значение
+     * {@link #getSystemCpuLoadBetweenTicks ()}.
      *
-     * @return the "recent cpu usage" for the whole system; a negative value if
-     *         not available.
+     * @return  «недавнее использование процессора» для всей системы; отрицательное значение, если
+     *         недоступен.
      */
     @SuppressWarnings("restriction")
     double getSystemCpuLoad();
 
     /**
-     * Returns the system load average for the last minute. This is equivalent
-     * to calling {@link CentralProcessor#getSystemLoadAverage(int)} with an
-     * argument of 1 and returning the first value, and is retained for
-     * compatibility.
-     *
-     * @return the system load average; or a negative value if not available.
+     * @return  среднюю нагрузку на систему; или отрицательное значение, если оно недоступно.
      */
     double getSystemLoadAverage();
 
     /**
-     * Returns the system load average for the number of elements specified, up
-     * to 3, representing 1, 5, and 15 minutes. The system load average is the
-     * sum of the number of runnable entities queued to the available processors
-     * and the number of runnable entities running on the available processors
-     * averaged over a period of time. The way in which the load average is
-     * calculated is operating system specific but is typically a damped
-     * time-dependent average. If the load average is not available, a negative
-     * value is returned. This method is designed to provide a hint about the
-     * system load and may be queried frequently. The load average may be
-     * unavailable on some platforms (e.g., Windows) where it is expensive to
-     * implement this method.
-     *
+     * Возвращает среднее значение загрузки системы для количества указанных элементов, вверх
+     * до 3, представляющих 1, 5 и 15 минут. Среднее значение загрузки системы
+     * сумма количества запущенных объектов, стоящих в очереди на доступные процессоры
+     * и количество запущенных объектов, запущенных на доступных процессорах
+     * усредненный за определенный промежуток времени. Способ усреднения нагрузки
+     * рассчитана для конкретной операционной системы, но обычно является затухающей
+     * зависящий от времени средний. Если среднее значение нагрузки недоступно, отрицательное
+     * значение возвращается. Этот метод предназначен для пояснения
+     * Системная нагрузка и может часто запрашиваться. Среднее значение нагрузки может быть
+     * недоступено на некоторых платформах (например, Windows), где это сложно реализовать
      * @param nelem
-     *            Number of elements to return.
-     * @return an array of the system load averages for 1, 5, and 15 minutes
-     *         with the size of the array specified by nelem; or negative values
-     *         if not available.
+     * Количество возвращаемых элементов.
+     * @return  массив средних значений загрузки системы за 1, 5 и 15 минут
+     * с размером массива, указанным nelem; или отрицательные значения
+     * если недоступно.
      */
     double[] getSystemLoadAverage(int nelem);
 
     /**
-     * Returns the "recent cpu usage" for all logical processors by counting
-     * ticks for the processors from {@link #getProcessorCpuLoadTicks()} between
-     * successive calls of this method, with a minimum interval slightly less
-     * than 1 second. If less than one second has elapsed since the last call of
-     * this method, it will return a calculation based on the tick counts and
-     * times of the previous two calls. If at least a second has elapsed, it
-     * will return the average CPU load for the interval and update the
-     * "last called" times. This method is intended to be used for periodic
-     * polling (iterating over all processors) at intervals of 1 second or
-     * longer.
+     * Возвращает «недавнее  использование процессора» для всех логических процессоров путем подсчета
+     * тиков для процессоров из {@link #getProcessorCpuLoadTicks ()} между
+     * последовательные вызовы этого метода с минимальным интервалом немного меньше
+     * более 1 секунды. Если прошло менее одной секунды со времени последнего вызова
+     * этот метод, он вернет расчет, основанный на подсчетах тиков и
+     * время предыдущих двух вызовов. Если прошло не менее секунды,
+     * вернет среднюю нагрузку на процессор для интервала и обновит
+     * «последнее время». Этот метод предназначен для периодического использования
+     * опрос (итерация по всем процессорам) с интервалом в 1 секунду или
+     * дольше.
      *
-     * @return array of CPU load between 0 and 1 (100%) for each logical
-     *         processor
+     * @return  массив загрузки процессора между 0 и 1 (100%) для каждого логического
+     * процессор
      */
     double[] getProcessorCpuLoadBetweenTicks();
 
     /**
-     * Get Processor CPU Load tick counters. Returns a two dimensional array,
-     * with {@link #getLogicalProcessorCount()} arrays, each containing seven
-     * elements representing either clock ticks or milliseconds (platform
-     * dependent) spent in User (0), Nice (1), System (2), Idle (3), IOwait (4),
-     * Hardware interrupts (IRQ) (5), Software interrupts/DPC (SoftIRQ) (6), or Steal (7)
-     * states. Use {@link TickType#getIndex()} to retrieve the appropriate
-     * index. By measuring the difference between ticks across a time interval,
-     * CPU load over that interval may be calculated.
+     * Получить счетчик загрузки процессора CPU. Возвращает двумерный массив,
+     * с {@link #getLogicalProcessorCount ()} массивами, каждый из которых содержит семь
+     * элементов, представляющих либо тики часов, либо миллисекунды (платформа
+     * зависимый), проведенный в User (0), Nice (1), System (2), Idle (3), IOwait (4),
+     * Аппаратные прерывания (IRQ) (5), Программные прерывания / DPC (SoftIRQ) (6)
+     * состояних. Используйте {@link TickType # getIndex ()} для получения соответствующего
+     * индекс. Измеряя разницу между тиками по временному интервалу,
+     * Нагрузка процессора на этот интервал может быть рассчитана.
      *
-     * Nice and IOwait per processor information is not available on Windows,
-     * and IOwait and IRQ information is not available on macOS, so these ticks
-     * will always be zero.
+     * Nice и IOwait на информацию о процессоре недоступна в Windows,
+     * и информация IOwait и IRQ недоступна для macOS, поэтому эти тики
+     * всегда будет равным нулю.
      *
-     * To calculate overall Idle time using this method, include both Idle and
-     * IOWait ticks. Similarly, IRQ, SoftIRQ and Steal ticks should be added to the
-     * System value to get the total. System ticks also include time executing
-     * other virtual hosts (steal).
+     * Чтобы рассчитать общее время простоя с помощью этого метода, включите как Idle, так и
+     * IOWait тикает. Аналогично, IRQ, SoftIRQ и Steal ticks должны быть добавлены к
+     * Системное значение, чтобы получить общее количество. Системные тики также включают выполнение времени
+     * другие виртуальные хосты (кража).
      *
-     * @return A 2D array of logicalProcessorCount x 7 long values representing
-     *         time spent in User, Nice, System, Idle, IOwait, IRQ, SoftIRQ, and Steal
-     *         states.
+     * @return 2D-массив значений логического ProcessorCount x 7, представляющих
+     * время, проведенное в User, Nice, System, Idle, IOwait, IRQ, SoftIRQ и Steal
+     *         состояниях.
      */
     long[][] getProcessorCpuLoadTicks();
 
@@ -248,12 +241,7 @@ public interface CentralProcessor extends Serializable {
     /**
      * Получите серийный номер System / CPU, если он доступен.
      *
-     * В Linux и FreeBSD для этого требуются либо корневые разрешения, либо установка
-     * (устаревшая) библиотека HAL (команда lshal). Linux также пытается
-     * читать файлы серийного номера dmi / id в sysfs, которые являются корнями только для чтения,
-     * по умолчанию, но могут иметь разрешения, измененные пользователем.
-     *
-     * @ вернуть системный / процессорный серийный номер, если он доступен, в противном случае возвращается
+     * @return  системный / процессорный серийный номер, если он доступен, в противном случае возвращается
      * "Неизвестный"
      *
      * @deprecated использовать {@link ComputerSystem # getSerialNumber ()} вместо этого.

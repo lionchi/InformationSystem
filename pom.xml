@@ -15,6 +15,7 @@
 
     <modules>
         <module>information-system-core</module>
+        <module>information-system-api</module>
     </modules>
 
     <build>
