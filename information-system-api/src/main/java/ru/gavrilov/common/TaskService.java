@@ -4,6 +4,7 @@ import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextInputControl;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -23,6 +24,8 @@ public class TaskService<T extends Task, C extends TextInputControl> {
         Stage stage = new Stage(StageStyle.UNDECORATED);
         GuiForm loader = new GuiForm("loader.fxml");
         stage.setScene(new Scene(loader.getParent()));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(control.getScene().getWindow());
         stage.setX(950);
         stage.setY(400);
         stage.show();
