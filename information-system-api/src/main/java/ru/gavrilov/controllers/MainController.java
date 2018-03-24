@@ -3,13 +3,13 @@ package ru.gavrilov.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import ru.gavrilov.common.Controller;
 import ru.gavrilov.common.TabEnum;
+import ru.gavrilov.common.TaskService;
+import ru.gavrilov.tasks.ComputerSystemTask;
+import ru.gavrilov.tasks.CpuTask;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,38 +17,56 @@ import java.util.Optional;
 
 public class MainController implements Controller {
     private Stage stage;
-    private List<TabEnum> tabEnumList = Arrays.asList(TabEnum.values());
 
     @FXML
     private TabPane tabPane;
     @FXML
-    private TextField computerSystemText;
+    private TextArea computerSystemText;
     @FXML
     private Button computerSystemButton;
+    @FXML
+    private TextArea cpuText;
+    @FXML
+    private Button cpuButton;
 
     private ObservableList<Tab> tabs = FXCollections.observableArrayList();
+    private List<TabEnum> tabEnumList = Arrays.asList(TabEnum.values());
 
     @FXML
     private void initialize(){
-        tabs =tabPane.getTabs();
+        this.tabs =tabPane.getTabs();
         tabPane.setOnMouseClicked(event -> getActiveTab());
+        this.computerSystemButton.setOnAction(event -> {
+            TaskService<ComputerSystemTask,TextArea> taskService = new TaskService<>(new ComputerSystemTask(),this.computerSystemText);
+            taskService.taskExecuter();
+        });
     }
 
     private Tab getActiveTab(){
-        Tab activeTab = tabPane.getSelectionModel().getSelectedItem();
-        Optional<TabEnum> tabEnum = tabEnumList.stream()
+        Tab activeTab = this.tabPane.getSelectionModel().getSelectedItem();
+        Optional<TabEnum> tabEnum = this.tabEnumList.stream()
                 .filter(tabEnum1 -> tabEnum1.getNameTab().equals(activeTab.getText()))
                 .findFirst();
         if(tabEnum.isPresent()){
             switch(tabEnum.get()){
                 case CUMPUTER_SYSTEM:
-                    //TODO
+                    if (this.computerSystemButton.getOnAction() == null) {
+                        this.computerSystemButton.setOnAction(event -> {
+                            TaskService<ComputerSystemTask,TextArea> taskService = new TaskService<>(new ComputerSystemTask(),this.computerSystemText);
+                            taskService.taskExecuter();
+                        });
+                    }
                     break;
                 case FILE_SYSTEM:
                     //TODO
                     break;
                 case CPU:
-                    //TODO
+                    if (this.cpuButton.getOnAction() == null) {
+                        this.cpuButton.setOnAction(event -> {
+                            TaskService<CpuTask,TextArea> taskService = new TaskService<>(new CpuTask(),this.cpuText);
+                            taskService.taskExecuter();
+                        });
+                    }
                     break;
                 case MEMORY:
                     //TODO
@@ -72,7 +90,7 @@ public class MainController implements Controller {
                     break;
             }
         }
-        return null;
+        return activeTab;
     }
 
     @Override
