@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.MainController">
@@ -42,7 +46,24 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="memoryButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
-                        <TextArea fx:id="memoryText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
+                        <TextField fx:id="processesText" layoutX="182.0" layoutY="14.0" prefHeight="25.0" prefWidth="125.0" />
+                        <Label layoutX="124.0" layoutY="18.0" text="Processes:" />
+                        <TableView fx:id="processesTable" layoutX="124.0" layoutY="49.0" prefHeight="200.0" prefWidth="452.0">
+                          <columns>
+                            <TableColumn fx:id="pid" prefWidth="60.0" text="PID" />
+                            <TableColumn fx:id="cpu" prefWidth="60.0" text="\%CPU" />
+                              <TableColumn fx:id="memory" prefWidth="60.0" text="\%MEM" />
+                              <TableColumn fx:id="vsz" prefWidth="75.0" text="VSZ " />
+                              <TableColumn fx:id="rss" prefWidth="75.0" text="RSS" />
+                              <TableColumn fx:id="name" prefWidth="120.0" text=" Name" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="memoryText" layoutX="293.0" layoutY="262.0" prefHeight="25.0" prefWidth="161.0" />
+                        <Label layoutX="246.0" layoutY="266.0" text="Memory:" />
+                        <Label layoutX="246.0" layoutY="302.0" text="Swap used:" />
+                        <TextField fx:id="swapText" layoutX="306.0" layoutY="298.0" />
+                        <Label layoutX="402.0" layoutY="18.0" text="Threads:" />
+                        <TextField fx:id="threadsText" layoutX="451.0" layoutY="14.0" prefHeight="25.0" prefWidth="125.0" />
                      </children></AnchorPane>
               </content>
             </Tab>

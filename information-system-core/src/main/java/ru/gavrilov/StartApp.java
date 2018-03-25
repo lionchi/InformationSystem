@@ -32,8 +32,8 @@ public class StartApp {
 
         printCpu(hardwareAbstractionLayer.getProcessor());*/
 
-/*        LOG.info("Checking Processes...");
-        printProcesses(operatingSystem, hardwareAbstractionLayer.getMemory());*/
+        LOG.info("Checking Processes...");
+        printProcesses(operatingSystem, hardwareAbstractionLayer.getMemory());
 
        /* LOG.info("Checking Sensors...");
         printSensors(hardwareAbstractionLayer.getSensors());
