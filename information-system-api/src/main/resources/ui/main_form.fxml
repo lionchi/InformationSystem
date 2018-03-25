@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.MainController">
    <children>
       <TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <tabs>
@@ -14,53 +14,81 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="computerSystemButton" layoutX="227.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
-                        <TextArea fx:id="computerSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="570.0" />
+                        <Button fx:id="computerSystemButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                        <TextArea fx:id="computerSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
                      </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="1" fx:id="fileSystemTab" text="File System">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="fileSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
+                        <Button fx:id="fileSystemButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                     </children></AnchorPane>
               </content>
             </Tab>
           <Tab id="2" fx:id="cpuTab" text="CPU">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="cpuText" layoutX="14.0" layoutY="14.0" prefHeight="306.0" prefWidth="572.0" />
-                        <Button fx:id="cpuButton" layoutX="227.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                        <TextArea fx:id="cpuText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
+                        <Button fx:id="cpuButton" layoutX="275.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
                      </children></AnchorPane>
             </content>
           </Tab>
             <Tab id="3" fx:id="memoryTab" text="Memory">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="memoryButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                        <TextArea fx:id="memoryText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="4" fx:id="hardDisksTab" text="HardDisks">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="hardDisksText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
+                        <Button fx:id="hardDisksButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить инфорамцию" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="5" fx:id="usbDevicesTab" text="USB Devices">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="usbDevicesButton" layoutX="276.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                        <TextArea fx:id="usbDevicesText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab id="6" fx:id="networkTab" text="Network">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="networkText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
+                        <Button fx:id="networkButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                     </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="7" fx:id="sensorsTab" text="Sensors">
+            <Tab id="7" fx:id="sensorsTab" text="Sensors and power sources">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="sensorsAndPSButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                        <TextArea fx:id="sensorsAndPSText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
+                     </children></AnchorPane>
               </content>
             </Tab>
           <Tab id="8" fx:id="displayTab" text="Display">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextArea fx:id="displayText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
+                        <Button fx:id="displayButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>

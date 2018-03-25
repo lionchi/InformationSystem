@@ -13,15 +13,22 @@ import java.util.Arrays;
 
 public class CpuTask extends Task<String>{
 
-    protected static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
-    protected static final Logger LOG = LoggerFactory.getLogger(CpuTask.class);
+    private static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
+    private static final Logger LOG = LoggerFactory.getLogger(CpuTask.class);
 
     @Override
     protected String call() throws Exception {
         LOG.info("Checking cpu...");
-        new Thread(this).start();
-        final CentralProcessor processor = hardwareAbstractionLayer.getProcessor();
+
+        CentralProcessor processor = hardwareAbstractionLayer.getProcessor();
         StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(processor + "\n");
+        stringBuilder.append(processor.getPhysicalProcessorCount() + " physical CPU(s)" + "\n");
+        stringBuilder.append(processor.getLogicalProcessorCount() + " logical CPU(s)" + "\n");
+
+        stringBuilder.append("Identifier: " + processor.getIdentifier() + "\n");
+        stringBuilder.append("ProcessorID: " + processor.getProcessorID() + "\n");
 
         stringBuilder.append("Uptime: " + FormatUtil.formatElapsedSecs(processor.getSystemUptime()) + "\n");
 
@@ -34,8 +41,8 @@ public class CpuTask extends Task<String>{
 
         this.printTotalCpu(stringBuilder,prevTicks, ticks);
 
-        stringBuilder.append(String.format("CPU load: %.1f%% (counting ticks)%n", processor.getSystemCpuLoadBetweenTicks() * 100) + "\n");
-        stringBuilder.append(String.format("CPU load: %.1f%% (OS MXBean)%n", processor.getSystemCpuLoad() * 100) + "\n");
+        stringBuilder.append(String.format("CPU load: %.1f%% (counting ticks)%n", processor.getSystemCpuLoadBetweenTicks() * 100));
+        stringBuilder.append(String.format("CPU load: %.1f%% (OS MXBean)%n", processor.getSystemCpuLoad() * 100));
 
         double[] loadAverage = processor.getSystemLoadAverage(3);
         stringBuilder.append(String.format("CPU load averages:" + (loadAverage[0] < 0 ? " N/A" : String.format(" %.2f", loadAverage[0]))
@@ -49,7 +56,6 @@ public class CpuTask extends Task<String>{
         }
         stringBuilder.append(procCpu.toString() + "\n");
 
-        //this.closeLoader(loaderStage);
         return  stringBuilder.toString();
     }
 
@@ -67,6 +73,6 @@ public class CpuTask extends Task<String>{
         stringBuilder.append(String.format(
                 "User: %.1f%% Nice: %.1f%% System: %.1f%% Idle: %.1f%% IOwait: %.1f%% IRQ: %.1f%% SoftIRQ: %.1f%%%n",
                 100d * user / totalCpu, 100d * nice / totalCpu, 100d * sys / totalCpu, 100d * idle / totalCpu,
-                100d * iowait / totalCpu, 100d * irq / totalCpu, 100d * softirq / totalCpu) + "\n");
+                100d * iowait / totalCpu, 100d * irq / totalCpu, 100d * softirq / totalCpu));
     }
 }

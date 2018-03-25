@@ -23,19 +23,19 @@ public class StartApp {
         HardwareAbstractionLayer hardwareAbstractionLayer = systemInfo.getHardware();
         OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
 
-        LOG.info("Checking computer system...");
+        /*LOG.info("Checking computer system...");
         printComputerSystem(hardwareAbstractionLayer.getComputerSystem());
 
         printProcessor(hardwareAbstractionLayer.getProcessor());
 
         printMemory(hardwareAbstractionLayer.getMemory());
 
-        printCpu(hardwareAbstractionLayer.getProcessor());
+        printCpu(hardwareAbstractionLayer.getProcessor());*/
 
-        LOG.info("Checking Processes...");
-        printProcesses(operatingSystem, hardwareAbstractionLayer.getMemory());
+/*        LOG.info("Checking Processes...");
+        printProcesses(operatingSystem, hardwareAbstractionLayer.getMemory());*/
 
-        LOG.info("Checking Sensors...");
+       /* LOG.info("Checking Sensors...");
         printSensors(hardwareAbstractionLayer.getSensors());
 
         LOG.info("Checking Power sources...");
@@ -55,7 +55,7 @@ public class StartApp {
 
         // hardware: displays
         LOG.info("Checking Displays...");
-        printDisplays(hardwareAbstractionLayer.getDisplays());
+        printDisplays(hardwareAbstractionLayer.getDisplays());*/
 
         // hardware: USB devices
         LOG.info("Checking USB Devices...");

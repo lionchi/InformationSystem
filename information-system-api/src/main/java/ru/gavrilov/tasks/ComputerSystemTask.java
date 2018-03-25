@@ -12,14 +12,14 @@ import ru.gavrilov.util.FormatUtil;
 
 public class ComputerSystemTask extends Task<String> {
 
-    protected static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
-    protected static final Logger LOG = LoggerFactory.getLogger(ComputerSystemTask.class);
+    private static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
+    private static final Logger LOG = LoggerFactory.getLogger(ComputerSystemTask.class);
 
     @Override
     protected String call() throws Exception {
         LOG.info("Checking computer system...");
 
-        final ComputerSystem computerSystem = hardwareAbstractionLayer.getComputerSystem();
+        ComputerSystem computerSystem = hardwareAbstractionLayer.getComputerSystem();
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -27,7 +27,7 @@ public class ComputerSystemTask extends Task<String> {
         stringBuilder.append("model: " + computerSystem.getModel() + "\n");
         stringBuilder.append("serialnumber: " + computerSystem.getSerialNumber() + "\n");
 
-        final Firmware firmware = computerSystem.getFirmware();
+        Firmware firmware = computerSystem.getFirmware();
 
         stringBuilder.append("firmware:" + "\n");
         stringBuilder.append("  manufacturer: " + firmware.getManufacturer() + "\n");
@@ -37,7 +37,7 @@ public class ComputerSystemTask extends Task<String> {
         stringBuilder.append("  release date: " + (firmware.getReleaseDate() == null ? "unknown"
                 : firmware.getReleaseDate() == null ? "unknown" : FormatUtil.formatDate(firmware.getReleaseDate())) + "\n");
 
-        final Baseboard baseboard = computerSystem.getBaseboard();
+        Baseboard baseboard = computerSystem.getBaseboard();
 
         stringBuilder.append("baseboard:" + "\n");
         stringBuilder.append("  manufacturer: " + baseboard.getManufacturer() + "\n");
