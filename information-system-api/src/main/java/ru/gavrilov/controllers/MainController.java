@@ -73,7 +73,7 @@ public class MainController implements Controller {
     @FXML
     private Button displayButton;
     @FXML
-    private TextArea usbDevicesText;
+    private TreeView<String> treeView;
     @FXML
     private Button usbDevicesButton;
 
@@ -143,8 +143,8 @@ public class MainController implements Controller {
                 case USB_DEVICES:
                     if (this.usbDevicesButton.getOnAction() == null) {
                         this.usbDevicesButton.setOnAction(event -> {
-                            TaskService<UsbDevicesTask, TextArea> taskService = new TaskService<>(new UsbDevicesTask(), this.usbDevicesText);
-                            taskService.taskExecuter();
+                            TaskService<UsbDevicesTask, TextArea> taskService = new TaskService<>(new UsbDevicesTask(), this.treeView);
+                            taskService.taskExecuterTreeView();
                         });
                     }
                     break;
