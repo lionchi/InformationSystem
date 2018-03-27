@@ -1,6 +1,7 @@
 package ru.gavrilov.tasks;
 
 import javafx.concurrent.Task;
+import javafx.scene.control.TreeItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.gavrilov.HWPartition;
@@ -9,37 +10,38 @@ import ru.gavrilov.hardware.HWDiskStore;
 import ru.gavrilov.hardware.HardwareAbstractionLayer;
 import ru.gavrilov.util.FormatUtil;
 
-public class HardDisksTask extends Task<String> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class HardDisksTask extends Task<TreeItem> {
     private static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
     private static final Logger LOG = LoggerFactory.getLogger(HardDisksTask.class);
 
     @Override
-    protected String call() throws Exception {
+    protected TreeItem call() throws Exception {
         LOG.info("Checking Disks...");
+        TreeItem rootItem = new TreeItem("Hard Disks");
+        List<TreeItem> contents = new ArrayList<>();
         HWDiskStore[] diskStores = hardwareAbstractionLayer.getDiskStores();
-        StringBuilder stringBuilder = new StringBuilder();
 
         for (HWDiskStore disk : diskStores) {
-            boolean readwrite = disk.getReads() > 0 || disk.getWrites() > 0;
-            stringBuilder.append(String.format("%s: (model: %s - S/N: %s) size: %s, reads: %s (%s), writes: %s (%s), xfer: %s ms%n",
-                    disk.getName(), disk.getModel(), disk.getSerial(),
-                    disk.getSize() > 0 ? FormatUtil.formatBytesDecimal(disk.getSize()) : "?",
-                    readwrite ? disk.getReads() : "?", readwrite ? FormatUtil.formatBytes(disk.getReadBytes()) : "?",
-                    readwrite ? disk.getWrites() : "?", readwrite ? FormatUtil.formatBytes(disk.getWriteBytes()) : "?",
-                    readwrite ? disk.getTransferTime() : "?"));
+            TreeItem treeItem = new TreeItem(disk);
 
             HWPartition[] partitions = disk.getPartitions();
             if (partitions == null) {
+                contents.add(treeItem);
                 continue;
             }
             for (HWPartition part : partitions) {
-                stringBuilder.append(String.format(" |-- %s: %s (%s) Maj:Min=%d:%d, size: %s%s%n", part.getIdentification(),
+                treeItem.getChildren().add(new TreeItem(String.format("%s: %s (%s) Maj:Min=%d:%d, size: %s%s", part.getIdentification(),
                         part.getName(), part.getType(), part.getMajor(), part.getMinor(),
                         FormatUtil.formatBytesDecimal(part.getSize()),
-                        part.getMountPoint().isEmpty() ? "" : " @ " + part.getMountPoint()));
+                        part.getMountPoint().isEmpty() ? "" : " @ " + part.getMountPoint())));
             }
+            contents.add(treeItem);
         }
 
-        return stringBuilder.toString();
+        rootItem.getChildren().addAll(contents);
+        return rootItem;
     }
 }

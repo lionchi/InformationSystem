@@ -187,4 +187,9 @@ public class HWDiskStore implements Serializable, Comparable<HWDiskStore> {
         return this.size == other.size;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+
+    }
 }

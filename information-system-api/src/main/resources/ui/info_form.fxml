@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.HardDisksController">
+   <children>
+      <TextField fx:id="name" layoutX="140.0" layoutY="30.0" />
+      <TextField fx:id="model" layoutX="140.0" layoutY="79.0" />
+      <TextField fx:id="serialNumber" layoutX="140.0" layoutY="132.0" />
+      <TextField fx:id="size" layoutX="140.0" layoutY="181.0" />
+      <TextField fx:id="reads" layoutX="140.0" layoutY="229.0" />
+      <Label layoutX="99.0" layoutY="34.0" text="Name" />
+      <Label layoutX="99.0" layoutY="83.0" text="Model" />
+      <Label layoutX="55.0" layoutY="136.0" text="Serial number" />
+      <Label layoutX="99.0" layoutY="185.0" text="Size" />
+      <Label layoutX="99.0" layoutY="233.0" text="Reads" />
+      <Label layoutX="99.0" layoutY="275.0" text="Writes" />
+      <TextField fx:id="writes" layoutX="140.0" layoutY="271.0" />
+      <TextField fx:id="transferTime" layoutX="140.0" layoutY="312.0" />
+      <Label layoutX="64.0" layoutY="316.0" text="Transfer time" />
+      <Button fx:id="okButton" layoutX="176.0" layoutY="355.0" mnemonicParsing="false" text="Ок" />
+   </children>
+</AnchorPane>

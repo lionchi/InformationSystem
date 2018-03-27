@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import ru.gavrilov.entrys.ProcessEntry;
+import ru.gavrilov.hardware.HWDiskStore;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -80,8 +81,8 @@ public class TaskService<T extends Task, I extends TextInputControl> {
         Executors.newCachedThreadPool().submit(task);
         this.initLoader();
         task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, eventTask -> {
-            TreeView<String> treeView = (TreeView<String>) this.node;
-            treeView.setRoot((TreeItem<String>) task.getValue());
+            TreeView treeView = (TreeView) this.node;
+            treeView.setRoot((TreeItem) task.getValue());
             this.loaderClosed();
         });
     }
