@@ -5,12 +5,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ru.gavrilov.common.Controller;
 import ru.gavrilov.hardware.HWDiskStore;
+import ru.gavrilov.software.OSFileStore;
 import ru.gavrilov.util.FormatUtil;
 
-public class HardDisksController implements Controller {
+public class InformationController implements Controller {
 
     private Stage stage;
     private HWDiskStore hwDiskStore;
+    private OSFileStore fileStore;
 
     public TextField name;
     public TextField model;
@@ -21,17 +23,31 @@ public class HardDisksController implements Controller {
     public TextField transferTime;
     public Button okButton;
 
+    public TextField description;
+    public TextField type;
+    public TextField usable;
+    public TextField totalSpace;
+    public TextField pr;
+    public TextField volume;
+    public TextField logicalVolume;
+    public TextField mount;
+
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    public void setHardDisksController(HWDiskStore hwDiskStore) {
-        this.hwDiskStore = hwDiskStore;
-        initField();
+    public <C> void setHardDisksController(C hwDiskStore) {
+        this.hwDiskStore = (HWDiskStore) hwDiskStore;
+        initFieldForHardDisks();
     }
 
-    private void initField() {
+    public <C> void setFileStore(C fileStore) {
+        this.fileStore = (OSFileStore) fileStore;
+        initFieldForFileStore();
+    }
+
+    private void initFieldForHardDisks() {
         boolean readwrite = hwDiskStore.getReads() > 0 || hwDiskStore.getWrites() > 0;
         name.setText(hwDiskStore.getName());
         model.setText(hwDiskStore.getModel());
@@ -44,6 +60,19 @@ public class HardDisksController implements Controller {
         String wrByte = readwrite ? FormatUtil.formatBytes(hwDiskStore.getWriteBytes()) : "?";
         writes.setText(wr + "(" + wrByte + ")");
         transferTime.setText(readwrite ? String.valueOf(hwDiskStore.getTransferTime()) : "?");
+        okButton.setOnAction(event -> stage.close());
+    }
+
+    private void initFieldForFileStore() {
+        name.setText(fileStore.getName());
+        description.setText(fileStore.getDescription().isEmpty() ? "file system" : fileStore.getDescription());
+        type.setText(fileStore.getType());
+        usable.setText(FormatUtil.formatBytes(fileStore.getUsableSpace()));
+        totalSpace.setText(FormatUtil.formatBytes(fileStore.getTotalSpace()));
+        pr.setText(String.valueOf(100d * fileStore.getUsableSpace() / fileStore.getTotalSpace()));
+        volume.setText(fileStore.getVolume());
+        logicalVolume.setText(fileStore.getLogicalVolume());
+        mount.setText(fileStore.getMount());
         okButton.setOnAction(event -> stage.close());
     }
 }

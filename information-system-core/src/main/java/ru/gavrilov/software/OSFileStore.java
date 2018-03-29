@@ -141,4 +141,8 @@ public class OSFileStore implements Serializable {
         this.totalSpace = value;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

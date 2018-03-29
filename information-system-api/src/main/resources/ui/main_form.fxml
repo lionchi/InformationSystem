@@ -17,7 +17,7 @@
         <tabs>
             <Tab id="0" fx:id="osTab" text="Computer System">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneComputer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="computerSystemButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
                         <TextArea fx:id="computerSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
@@ -26,7 +26,7 @@
             </Tab>
             <Tab id="1" fx:id="fileSystemTab" text="File System">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneFileSystem" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="fileSystemButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
                         <TreeView fx:id="treeViewFileSystem" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
@@ -35,7 +35,7 @@
             </Tab>
           <Tab id="2" fx:id="cpuTab" text="CPU">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="paneCpu" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextArea fx:id="cpuText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
                         <Button fx:id="cpuButton" layoutX="275.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
@@ -44,7 +44,7 @@
           </Tab>
             <Tab id="3" fx:id="memoryTab" text="Memory">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneMemory" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="memoryButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
                         <TextField fx:id="processesText" layoutX="182.0" layoutY="14.0" prefHeight="25.0" prefWidth="125.0" />
@@ -70,7 +70,7 @@
             </Tab>
             <Tab id="4" fx:id="hardDisksTab" text="HardDisks">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneHardDisks" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="hardDisksButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить инфорамцию" />
                         <TreeView fx:id="treeViewDisks" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
@@ -79,7 +79,7 @@
             </Tab>
             <Tab id="5" fx:id="usbDevicesTab" text="USB Devices">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneUsb" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="usbDevicesButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
                         <TreeView fx:id="treeView" layoutX="85.0" layoutY="21.0" prefHeight="283.0" prefWidth="528.0" />
@@ -88,7 +88,7 @@
             </Tab>
             <Tab id="6" fx:id="networkTab" text="Network">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneNetwork" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextArea fx:id="networkText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" wrapText="true" />
                         <Button fx:id="networkButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
@@ -97,7 +97,7 @@
             </Tab>
             <Tab id="7" fx:id="sensorsTab" text="Sensors and power sources">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane fx:id="paneSensors" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="sensorsAndPSButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />
                         <TextArea fx:id="sensorsAndPSText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
@@ -106,7 +106,7 @@
             </Tab>
           <Tab id="8" fx:id="displayTab" text="Display">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane fx:id="paneDisplay" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TextArea fx:id="displayText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="670.0" />
                         <Button fx:id="displayButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Получить информацию" />

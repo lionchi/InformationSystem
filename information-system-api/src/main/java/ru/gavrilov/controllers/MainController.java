@@ -3,19 +3,13 @@ package ru.gavrilov.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
-import ru.gavrilov.common.Controller;
-import ru.gavrilov.common.GuiForm;
-import ru.gavrilov.common.TabEnum;
-import ru.gavrilov.common.TaskService;
+import ru.gavrilov.common.*;
 import ru.gavrilov.entrys.ProcessEntry;
 import ru.gavrilov.hardware.HWDiskStore;
+import ru.gavrilov.software.OSFileStore;
 import ru.gavrilov.tasks.*;
 
 import java.util.Arrays;
@@ -30,7 +24,7 @@ public class MainController implements Controller {
     public Button computerSystemButton;
     public TextArea cpuText;
     public Button cpuButton;
-    public TreeView<String> treeViewFileSystem;
+    public TreeView<OSFileStore> treeViewFileSystem;
     public Button fileSystemButton;
     public TableView<ProcessEntry> processesTable;
     public TableColumn<ProcessEntry, String> pid;
@@ -55,40 +49,27 @@ public class MainController implements Controller {
     public TreeView<String> treeView;
     public Button usbDevicesButton;
 
-    private ObservableList<Tab> tabs = FXCollections.observableArrayList();
+    public AnchorPane paneComputer;
+    public AnchorPane paneFileSystem;
+    public AnchorPane paneCpu;
+    public AnchorPane paneMemory;
+    public AnchorPane paneHardDisks;
+    public AnchorPane paneUsb;
+    public AnchorPane paneNetwork;
+    public AnchorPane paneSensors;
+    public AnchorPane paneDisplay;
+
     private ObservableList<ProcessEntry> tableModels = FXCollections.observableArrayList();
     private List<TabEnum> tabEnumList = Arrays.asList(TabEnum.values());
 
     @FXML
     private void initialize() {
-        this.tabs = tabPane.getTabs();
         tabPane.setOnMouseClicked(event -> getActiveTab());
-        this.treeViewDisks.setOnMouseClicked(event -> {
-            if (event.getClickCount() >= 2) {
-                try {
-                    HWDiskStore diskStore = treeViewDisks.getSelectionModel().getSelectedItem().getValue();
-                    GuiForm<AnchorPane, HardDisksController> form = new GuiForm<>("info_form.fxml");
-                    Stage stage = new Stage(StageStyle.UTILITY);
-                    AnchorPane parent = form.getParent();
-                    HardDisksController controller = form.getController();
-                    controller.setHardDisksController(diskStore);
-                    controller.setStage(stage);
-                    Scene scene = new Scene(parent);
-                    stage.setScene(scene);
-                    stage.initModality(Modality.WINDOW_MODAL);
-                    Window window =this.treeView.getScene().getWindow();
-                    stage.initOwner(window);
-                    stage.centerOnScreen();
-                    stage.showAndWait();
-                }
-                catch (Exception e){
-                    new Alert(Alert.AlertType.WARNING,"Двойной клик срабатывает только при нажатии на элемент дерева").showAndWait();
-                }
-            }
-        });
+        TreeViewService.setOnMouseClickForTreeView(treeViewDisks);
+        TreeViewService.setOnMouseClickForTreeView(treeViewFileSystem);
         this.computerSystemButton.setOnAction(event -> {
-            TaskService<ComputerSystemTask, TextArea> taskService = new TaskService<>(new ComputerSystemTask(), this.computerSystemText);
-            taskService.taskExecuter();
+            TaskService<ComputerSystemTask, AnchorPane> taskService = new TaskService<>(new ComputerSystemTask(), this.paneComputer);
+            taskService.taskExecuter(this.computerSystemText);
         });
     }
 
@@ -102,24 +83,25 @@ public class MainController implements Controller {
                 case CUMPUTER_SYSTEM:
                     if (this.computerSystemButton.getOnAction() == null) {
                         this.computerSystemButton.setOnAction(event -> {
-                            TaskService<ComputerSystemTask, TextArea> taskService = new TaskService<>(new ComputerSystemTask(), this.computerSystemText);
-                            taskService.taskExecuter();
+                            TaskService<ComputerSystemTask, AnchorPane> taskService = new TaskService<>(new ComputerSystemTask(), this.paneComputer);
+                            taskService.taskExecuter(this.computerSystemText);
                         });
                     }
                     break;
                 case FILE_SYSTEM:
                     if (this.fileSystemButton.getOnAction() == null) {
                         this.fileSystemButton.setOnAction(event -> {
-                            TaskService<FileSystemTask, TextArea> taskService = new TaskService<>(new FileSystemTask(), this.treeViewFileSystem);
-                            taskService.taskExecuterTreeView();
+                            TaskService<FileSystemTask, AnchorPane> taskService = new TaskService<>(new FileSystemTask(), this.paneFileSystem);
+                            AnchorPane root = (AnchorPane) activeTab.getContent();
+                            taskService.taskExecuterTreeView(this.treeViewFileSystem);
                         });
                     }
                     break;
                 case CPU:
                     if (this.cpuButton.getOnAction() == null) {
                         this.cpuButton.setOnAction(event -> {
-                            TaskService<CpuTask, TextArea> taskService = new TaskService<>(new CpuTask(), this.cpuText);
-                            taskService.taskExecuter();
+                            TaskService<CpuTask, AnchorPane> taskService = new TaskService<>(new CpuTask(), this.paneCpu);
+                            taskService.taskExecuter(this.cpuText);
                         });
                     }
                     break;
@@ -127,9 +109,9 @@ public class MainController implements Controller {
                     if (this.memoryButton.getOnAction() == null) {
                         this.memoryButton.setOnAction(event -> {
                             processesTable.getItems().clear();
-                            TaskService<MemoryTask, TextField> taskServiceForMemory = new TaskService<>(new MemoryTask(), this.processesText);
+                            TaskService<MemoryTask, AnchorPane> taskServiceForMemory = new TaskService<>(new MemoryTask(), this.paneMemory);
                             taskServiceForMemory.taskExecuter(this.processesText, this.threadsText, this.memoryText, this.swapText);
-                            TaskService<ProcessTask, TextField> taskServiceProcess = new TaskService<>(new ProcessTask(), this.processesText);
+                            TaskService<ProcessTask, AnchorPane> taskServiceProcess = new TaskService<>(new ProcessTask(), this.paneMemory);
                             taskServiceProcess.taskExecuterProcess(processesTable, pid, cpu, memory, vsz, name, rss, tableModels);
                         });
                     }
@@ -137,40 +119,40 @@ public class MainController implements Controller {
                 case HARD_DISKS:
                     if (this.hardDisksButton.getOnAction() == null) {
                         this.hardDisksButton.setOnAction(event -> {
-                            TaskService<HardDisksTask, TextArea> taskService = new TaskService<>(new HardDisksTask(), this.treeViewDisks);
-                            taskService.taskExecuterTreeView();
+                            TaskService<HardDisksTask, AnchorPane> taskService = new TaskService<>(new HardDisksTask(), this.paneHardDisks);
+                            taskService.taskExecuterTreeView(this.treeViewDisks);
                         });
                     }
                     break;
                 case USB_DEVICES:
                     if (this.usbDevicesButton.getOnAction() == null) {
                         this.usbDevicesButton.setOnAction(event -> {
-                            TaskService<UsbDevicesTask, TextArea> taskService = new TaskService<>(new UsbDevicesTask(), this.treeView);
-                            taskService.taskExecuterTreeView();
+                            TaskService<UsbDevicesTask, AnchorPane> taskService = new TaskService<>(new UsbDevicesTask(), this.paneUsb);
+                            taskService.taskExecuterTreeView(this.treeView);
                         });
                     }
                     break;
                 case NETWORK:
                     if (this.networkButton.getOnAction() == null) {
                         this.networkButton.setOnAction(event -> {
-                            TaskService<NetworkTask, TextArea> taskService = new TaskService<>(new NetworkTask(), this.networkText);
-                            taskService.taskExecuter();
+                            TaskService<NetworkTask, AnchorPane> taskService = new TaskService<>(new NetworkTask(), this.paneNetwork);
+                            taskService.taskExecuter(this.networkText);
                         });
                     }
                     break;
                 case SENSORS_AND_PS:
                     if (this.sensorsAndPSButton.getOnAction() == null) {
                         this.sensorsAndPSButton.setOnAction(event -> {
-                            TaskService<SensorsAndPsTask, TextArea> taskService = new TaskService<>(new SensorsAndPsTask(), this.sensorsAndPSText);
-                            taskService.taskExecuter();
+                            TaskService<SensorsAndPsTask, AnchorPane> taskService = new TaskService<>(new SensorsAndPsTask(), this.paneSensors);
+                            taskService.taskExecuter(this.sensorsAndPSText);
                         });
                     }
                     break;
                 case DISPLAY:
                     if (this.displayButton.getOnAction() == null) {
                         this.displayButton.setOnAction(event -> {
-                            TaskService<DisplayTask, TextArea> taskService = new TaskService<>(new DisplayTask(), this.displayText);
-                            taskService.taskExecuter();
+                            TaskService<DisplayTask, AnchorPane> taskService = new TaskService<>(new DisplayTask(), this.paneDisplay);
+                            taskService.taskExecuter(this.displayText);
                         });
                     }
                     break;

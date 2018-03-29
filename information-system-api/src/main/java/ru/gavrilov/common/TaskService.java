@@ -6,6 +6,8 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,34 +20,27 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class TaskService<T extends Task, I extends TextInputControl> {
+public class TaskService<T extends Task, P extends Pane> {
     private T task;
-    private I inputControl;
-    private Node node;
-    private Stage stage = new Stage(StageStyle.UNDECORATED);
+    private P pane;
 
-    public TaskService(T task, I inputControl) {
+    public TaskService(T task, P pane) {
         this.task = task;
-        this.inputControl = inputControl;
+        this.pane = pane;
     }
 
-    public TaskService(T task, Node node) {
-        this.task = task;
-        this.node = node;
-    }
-
-    public void taskExecuter() {
+    public void taskExecuter(TextInputControl inputControl) {
         Executors.newCachedThreadPool().submit(task);
-        this.initLoader();
+        ProgressIndicator pi = this.initLoader();
         task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, eventTask -> {
             inputControl.setText((String) task.getValue());
-            this.loaderClosed();
+            this.loaderClosed(pi);
         });
     }
 
     public void taskExecuter(TextInputControl... inputControls) {
         Executors.newCachedThreadPool().submit(task);
-        this.initLoader();
+        ProgressIndicator pi = this.initLoader();
         task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, eventTask -> {
             List<String> values = (List<String>) task.getValue();
             int i = 0;
@@ -53,7 +48,7 @@ public class TaskService<T extends Task, I extends TextInputControl> {
                 inputControl.setText(values.get(i));
                 i++;
             }
-            this.loaderClosed();
+            this.loaderClosed(pi);
         });
     }
 
@@ -62,7 +57,7 @@ public class TaskService<T extends Task, I extends TextInputControl> {
                                     TableColumn<ProcessEntry, String> vsz, TableColumn<ProcessEntry, String> name,
                                     TableColumn<ProcessEntry, String> rss, ObservableList<ProcessEntry> tableModels) {
         Executors.newCachedThreadPool().submit(task);
-        this.initLoader();
+        ProgressIndicator pi = this.initLoader();
         task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, eventTask -> {
             tableModels.addAll((Collection<? extends ProcessEntry>) task.getValue());
             pid.setCellValueFactory(cellData->cellData.getValue().pidProperty());
@@ -73,21 +68,41 @@ public class TaskService<T extends Task, I extends TextInputControl> {
             name.setCellValueFactory(cellData->cellData.getValue().nameProperty());
             processesTable.setItems(tableModels);
             processesTable.setColumnResizePolicy(param -> false);
-            this.loaderClosed();
+            this.loaderClosed(pi);
         });
     }
 
-    public void taskExecuterTreeView() {
+    public void taskExecuterTreeView(TreeView treeView) {
         Executors.newCachedThreadPool().submit(task);
-        this.initLoader();
+        ProgressIndicator pi = this.initLoader();
         task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, eventTask -> {
-            TreeView treeView = (TreeView) this.node;
             treeView.setRoot((TreeItem) task.getValue());
-            this.loaderClosed();
+            this.loaderClosed(pi);
         });
     }
 
-    private void initLoader (){
+    private ProgressIndicator initLoader (){
+        ProgressIndicator pi=new ProgressIndicator();
+        Window window = this.pane.getScene().getWindow();
+        double centerXPosition = window.getX() + window.getWidth()/2d;
+        double centerYPosition = window.getY() + window.getHeight()/2d;
+        pi.setLayoutX(window.getWidth()/2d-30d);
+        pi.setLayoutY(window.getHeight()/2d-75d);
+        pi.setStyle("-fx-accent: #0A7552;" +
+                "-fx-control-inner-background: #a1a1a1;");
+        pi.setPrefSize(35,35);
+        pi.progressProperty();
+
+        pane.getChildren().add(pi);
+
+        return pi;
+    }
+
+    private void loaderClosed(ProgressIndicator pi){
+        this.pane.getChildren().remove(pi);
+    }
+
+/*    private void initLoader (){
         GuiForm loader = new GuiForm("loader.fxml");
         this.stage.setScene(new Scene(loader.getParent()));
         this.stage.initModality(Modality.WINDOW_MODAL);
@@ -102,5 +117,5 @@ public class TaskService<T extends Task, I extends TextInputControl> {
 
     private void loaderClosed(){
         this.stage.close();
-    }
+    }*/
 }
