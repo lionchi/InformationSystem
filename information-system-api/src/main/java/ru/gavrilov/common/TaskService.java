@@ -95,10 +95,12 @@ public class TaskService<T extends Task, P extends Pane> {
 
         pane.getChildren().add(pi);
 
+        this.pane.setDisable(true);
         return pi;
     }
 
     private void loaderClosed(ProgressIndicator pi){
+        this.pane.setDisable(false);
         this.pane.getChildren().remove(pi);
     }
 
