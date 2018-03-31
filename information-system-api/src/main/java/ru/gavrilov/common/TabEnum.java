@@ -8,7 +8,7 @@ public enum TabEnum {
     HARD_DISKS("HardDisks"),
     USB_DEVICES("USB Devices"),
     NETWORK("Network"),
-    SENSORS_AND_PS("Sensors and power sources"),
+    SENSORS_AND_PS("Sensors and power"),
     DISPLAY("Display");
 
     private String nameTab;
