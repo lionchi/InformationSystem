@@ -7,7 +7,6 @@
 .AnchorPane
 {
     -fx-background-color: #36312e;
-    -fx-text-fill: white;
 }
 
 .tabPane
@@ -59,6 +58,7 @@
 
 .computerSystemButton:hover{
     -fx-background-color: linear-gradient(to bottom, grey,#b8dbff);
+    -fx-cursor: hand;
     -fx-alignment: CENTER;
     -fx-text-fill: white;
     -fx-font-size: 11px;
@@ -82,4 +82,43 @@
     -fx-text-fill: white;
     -fx-font-size: 11px;
     -fx-font-weight: bold;
+}
+
+.ok {
+    -fx-background-color: linear-gradient(to bottom, #373e47, #85c2ff);
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.ok:hover{
+    -fx-background-color: linear-gradient(to bottom, grey,#b8dbff);
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.ok:pressed {
+    -fx-background-color: linear-gradient(to top left, #373e47, #627182);
+    -fx-alignment: CENTER;
+    -fx-text-fill: grey;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tree-cell .tree-disclosure-node .arrow {
+    -fx-shape: null;
+    -fx-background-color: null;
+    -fx-background-size:cover;
+    -fx-padding: 6px;
+    -fx-background-image: url("image/plus1.png");
+}
+.tree-cell:expanded .tree-disclosure-node .arrow {
+    -fx-shape: null;
+    -fx-background-color: null;
+    -fx-padding: 6px;
+    -fx-background-image: url("image/minus1.png");
 }
