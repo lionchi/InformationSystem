@@ -8,6 +8,8 @@ import ru.gavrilov.hardware.HWDiskStore;
 import ru.gavrilov.software.OSFileStore;
 import ru.gavrilov.util.FormatUtil;
 
+import java.math.BigDecimal;
+
 public class InformationController implements Controller {
 
     private Stage stage;
@@ -69,7 +71,7 @@ public class InformationController implements Controller {
         type.setText(fileStore.getType());
         usable.setText(FormatUtil.formatBytes(fileStore.getUsableSpace()));
         totalSpace.setText(FormatUtil.formatBytes(fileStore.getTotalSpace()));
-        pr.setText(String.valueOf(100d * fileStore.getUsableSpace() / fileStore.getTotalSpace()));
+        pr.setText(String.valueOf(BigDecimal.valueOf(100d * fileStore.getUsableSpace() / fileStore.getTotalSpace()).setScale(BigDecimal.ROUND_CEILING,2)));
         volume.setText(fileStore.getVolume());
         logicalVolume.setText(fileStore.getLogicalVolume());
         mount.setText(fileStore.getMount());

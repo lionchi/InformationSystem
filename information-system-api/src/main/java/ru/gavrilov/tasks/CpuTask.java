@@ -24,13 +24,13 @@ public class CpuTask extends Task<String>{
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(processor + "\n");
-        stringBuilder.append(processor.getPhysicalProcessorCount() + " physical CPU(s)" + "\n");
-        stringBuilder.append(processor.getLogicalProcessorCount() + " logical CPU(s)" + "\n");
+        stringBuilder.append(processor.getPhysicalProcessorCount() + " физических CPU(s)" + "\n");
+        stringBuilder.append(processor.getLogicalProcessorCount() + " логических CPU(s)" + "\n");
 
-        stringBuilder.append("Identifier: " + processor.getIdentifier() + "\n");
-        stringBuilder.append("ProcessorID: " + processor.getProcessorID() + "\n");
+        stringBuilder.append("Идентификатор: " + processor.getIdentifier() + "\n");
+        stringBuilder.append("Процессор ID: " + processor.getProcessorID() + "\n");
 
-        stringBuilder.append("Uptime: " + FormatUtil.formatElapsedSecs(processor.getSystemUptime()) + "\n");
+        stringBuilder.append("Время с момента загрузки: " + FormatUtil.formatElapsedSecs(processor.getSystemUptime()) + "\n");
 
         long[] prevTicks = processor.getSystemCpuLoadTicks();
         stringBuilder.append("CPU, IOWait, and IRQ ticks @ 0 sec:" + Arrays.toString(prevTicks) + "\n");
@@ -41,15 +41,15 @@ public class CpuTask extends Task<String>{
 
         this.printTotalCpu(stringBuilder,prevTicks, ticks);
 
-        stringBuilder.append(String.format("CPU load: %.1f%% (counting ticks)%n", processor.getSystemCpuLoadBetweenTicks() * 100));
-        stringBuilder.append(String.format("CPU load: %.1f%% (OS MXBean)%n", processor.getSystemCpuLoad() * 100));
+        stringBuilder.append(String.format("CPU загрузка: %.1f%% (подсчет тактов)%n", processor.getSystemCpuLoadBetweenTicks() * 100));
+        stringBuilder.append(String.format("CPU загрузка: %.1f%% (OS MXBean)%n", processor.getSystemCpuLoad() * 100));
 
         double[] loadAverage = processor.getSystemLoadAverage(3);
-        stringBuilder.append(String.format("CPU load averages:" + (loadAverage[0] < 0 ? " N/A" : String.format(" %.2f", loadAverage[0]))
+        stringBuilder.append(String.format("CPU среднее значение загрузки:" + (loadAverage[0] < 0 ? " N/A" : String.format(" %.2f", loadAverage[0]))
                 + (loadAverage[1] < 0 ? " N/A" : String.format(" %.2f", loadAverage[1]))
                 + (loadAverage[2] < 0 ? " N/A" : String.format(" %.2f", loadAverage[2]))) + "\n");
         // на ядро CPU
-        StringBuilder procCpu = new StringBuilder("CPU load per processor:");
+        StringBuilder procCpu = new StringBuilder("CPU загрузка процессора на ядро:");
         double[] load = processor.getProcessorCpuLoadBetweenTicks();
         for (double avg : load) {
             procCpu.append(String.format(" %.1f%%", avg * 100));

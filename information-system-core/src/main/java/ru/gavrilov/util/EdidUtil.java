@@ -133,10 +133,10 @@ public class EdidUtil {
 
     public static String toString(byte[] edid) {
         StringBuilder sb = new StringBuilder();
-        sb.append("  Manuf. ID=").append(EdidUtil.getManufacturerID(edid)).append(", Product ID=")
+        sb.append("  Manuf. ID=").append(EdidUtil.getManufacturerID(edid)).append(", ID продукта=")
                 .append(EdidUtil.getProductID(edid)).append(", ")
-                .append(EdidUtil.isDigital(edid) ? "Digital" : "Analog").append(", Serial=")
-                .append(EdidUtil.getSerialNo(edid)).append(", ManufDate=")
+                .append(EdidUtil.isDigital(edid) ? "Цифровой" : "Аналоговый").append(", Серийный=")
+                .append(EdidUtil.getSerialNo(edid)).append(", Manuf.Date=")
                 .append(EdidUtil.getWeek(edid) * 12 / 52 + 1 + "/").append(EdidUtil.getYear(edid)).append(", EDID v")
                 .append(EdidUtil.getVersion(edid));
         int hSize = EdidUtil.getHcm(edid);
@@ -146,28 +146,28 @@ public class EdidUtil {
         for (byte[] b : desc) {
             switch (EdidUtil.getDescriptorType(b)) {
             case 0xff:
-                sb.append("\n  Serial Number: ").append(EdidUtil.getDescriptorText(b));
+                sb.append("\n  Серийный номер: ").append(EdidUtil.getDescriptorText(b));
                 break;
             case 0xfe:
-                sb.append("\n  Unspecified Text: ").append(EdidUtil.getDescriptorText(b));
+                sb.append("\n  Неопределенный текст: ").append(EdidUtil.getDescriptorText(b));
                 break;
             case 0xfd:
-                sb.append("\n  Range Limits: ").append(EdidUtil.getDescriptorRangeLimits(b));
+                sb.append("\n  Ограничения диапазона: ").append(EdidUtil.getDescriptorRangeLimits(b));
                 break;
             case 0xfc:
-                sb.append("\n  Monitor Name: ").append(EdidUtil.getDescriptorText(b));
+                sb.append("\n  Имя монитора: ").append(EdidUtil.getDescriptorText(b));
                 break;
             case 0xfb:
                 sb.append("\n  White Point Data: ").append(EdidUtil.getDescriptorHex(b));
                 break;
             case 0xfa:
-                sb.append("\n  Standard Timing ID: ").append(EdidUtil.getDescriptorHex(b));
+                sb.append("\n  Стандартный идентификатор синхронизации: ").append(EdidUtil.getDescriptorHex(b));
                 break;
             default:
                 if (EdidUtil.getDescriptorType(b) <= 0x0f && EdidUtil.getDescriptorType(b) >= 0x00) {
-                    sb.append("\n  Manufacturer Data: ").append(EdidUtil.getDescriptorHex(b));
+                    sb.append("\n  Данные производителя: ").append(EdidUtil.getDescriptorHex(b));
                 } else {
-                    sb.append("\n  Preferred Timing: ").append(EdidUtil.getTimingDescriptor(b));
+                    sb.append("\n  Предпочтительное время синхронизации: ").append(EdidUtil.getTimingDescriptor(b));
                 }
                 break;
             }

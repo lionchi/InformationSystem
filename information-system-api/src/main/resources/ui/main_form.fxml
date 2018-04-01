@@ -17,7 +17,7 @@
    <children>
       <TabPane fx:id="tabPane" layoutX="-8.0" prefHeight="400.0" prefWidth="742.0" stylesheets="@../css/MyStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <tabs>
-            <Tab id="0" fx:id="osTab" text="Computer System">
+            <Tab id="0" fx:id="osTab" text="ПК">
               <content>
                 <AnchorPane fx:id="paneComputer" minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="750.0" styleClass="paneComputer" stylesheets="@../css/MyStyle.css">
                      <children>
@@ -29,7 +29,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="1" fx:id="fileSystemTab" text="File System">
+            <Tab id="1" fx:id="fileSystemTab" text="Файловая система">
               <content>
                 <AnchorPane fx:id="paneFileSystem" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="paneComputer" stylesheets="@../css/MyStyle.css">
                      <children>
@@ -60,7 +60,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab id="3" fx:id="memoryTab" text="Memory">
+            <Tab id="3" fx:id="memoryTab" text="Процессы">
               <content>
                 <AnchorPane fx:id="paneMemory" minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="470.0">
                      <children>
@@ -86,7 +86,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="4" fx:id="hardDisksTab" text="HardDisks">
+            <Tab id="4" fx:id="hardDisksTab" text="HDD">
               <content>
                 <AnchorPane fx:id="paneHardDisks" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -95,7 +95,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="5" fx:id="usbDevicesTab" text="USB Devices">
+            <Tab id="5" fx:id="usbDevicesTab" text="Контроллеры USB">
               <content>
                 <AnchorPane fx:id="paneUsb" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -104,7 +104,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="6" fx:id="networkTab" text="Network">
+            <Tab id="6" fx:id="networkTab" text="Интернет">
               <content>
                 <AnchorPane fx:id="paneNetwork" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -113,7 +113,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab id="7" fx:id="sensorsTab" text="Sensors and power">
+            <Tab id="7" fx:id="sensorsTab" text="Состояние ПК">
               <content>
                 <AnchorPane fx:id="paneSensors" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -122,7 +122,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-          <Tab id="8" fx:id="displayTab" text="Display">
+          <Tab id="8" fx:id="displayTab" text="Дисплей">
             <content>
               <AnchorPane fx:id="paneDisplay" minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="747.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="51.0">
                      <children>

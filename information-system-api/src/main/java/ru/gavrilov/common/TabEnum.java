@@ -1,15 +1,15 @@
 package ru.gavrilov.common;
 
 public enum TabEnum {
-    CUMPUTER_SYSTEM("Computer System"),
-    FILE_SYSTEM("File System"),
+    CUMPUTER_SYSTEM("ПК"),
+    FILE_SYSTEM("Файловая система"),
     CPU("CPU"),
-    MEMORY("Memory"),
-    HARD_DISKS("HardDisks"),
-    USB_DEVICES("USB Devices"),
-    NETWORK("Network"),
-    SENSORS_AND_PS("Sensors and power"),
-    DISPLAY("Display");
+    PROCESS("Процессы"),
+    HDD("HDD"),
+    USB_CONTROLLERS("Контроллеры USB"),
+    NETWORK("Интернет"),
+    STATUS_PK("Состояние ПК"),
+    DISPLAY("Дисплей");
 
     private String nameTab;
 

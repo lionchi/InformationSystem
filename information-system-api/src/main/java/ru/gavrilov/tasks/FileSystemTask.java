@@ -19,7 +19,7 @@ public class FileSystemTask extends Task<TreeItem> {
     protected TreeItem call() throws Exception {
         LOG.info("Checking file system...");
         FileSystem fileSystem = operatingSystem.getFileSystem();
-        TreeItem rootItem = new TreeItem("File System");
+        TreeItem rootItem = new TreeItem("Файловая система");
 
         OSFileStore[] fsArray = fileSystem.getFileStores();
         for (OSFileStore fs : fsArray) {

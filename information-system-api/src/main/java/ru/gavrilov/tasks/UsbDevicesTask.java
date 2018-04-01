@@ -20,7 +20,7 @@ public class UsbDevicesTask extends Task<TreeItem> {
     @Override
     protected TreeItem call() throws Exception {
         LOG.info("Checking USB controllers..");
-        TreeItem rootItem = new TreeItem("USB controllers");
+        TreeItem rootItem = new TreeItem("Контроллеры USB");
 
         rootItem.getChildren().addAll(getContent());
 

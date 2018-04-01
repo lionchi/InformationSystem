@@ -18,11 +18,11 @@ public class SensorsAndPsTask extends Task<String> {
     protected String call() throws Exception {
         LOG.info("Checking Sensors...");
         Sensors sensors = hardwareAbstractionLayer.getSensors();
-        StringBuilder stringBuilder = new StringBuilder("Sensors:");
+        StringBuilder stringBuilder = new StringBuilder("Датчики:");
 
-        stringBuilder.append(String.format("CPU Temperature: %.1f°C%n", sensors.getCpuTemperature()));
-        stringBuilder.append(String.format("Fan Speeds: " + Arrays.toString(sensors.getFanSpeeds())) + "\n");
-        stringBuilder.append(String.format("CPU Voltage: %.1fV%n", sensors.getCpuVoltage()));
+        stringBuilder.append(String.format("CPU температура: %.1f°C%n", sensors.getCpuTemperature()));
+        stringBuilder.append(String.format("Скорость вентилятора: " + Arrays.toString(sensors.getFanSpeeds())) + "\n");
+        stringBuilder.append(String.format("CPU вольтаж: %.1fV%n", sensors.getCpuVoltage()));
 
         stringBuilder.append(getPowerSources());
 
@@ -32,17 +32,17 @@ public class SensorsAndPsTask extends Task<String> {
     private String getPowerSources() {
         LOG.info("Checking Power sources...");
         PowerSource[] powerSources = hardwareAbstractionLayer.getPowerSources();
-        StringBuilder powerSourcesBuilder = new StringBuilder("Power: ");
+        StringBuilder powerSourcesBuilder = new StringBuilder("Мощность: ");
         if (powerSources.length == 0) {
-            powerSourcesBuilder.append("Unknown");
+            powerSourcesBuilder.append("Неизвестна");
         } else {
             double timeRemaining = powerSources[0].getTimeRemaining();
             if (timeRemaining < -1d) {
-                powerSourcesBuilder.append("Charging");
+                powerSourcesBuilder.append("Зарядка");
             } else if (timeRemaining < 0d) {
-                powerSourcesBuilder.append("Calculating time remaining");
+                powerSourcesBuilder.append("Вычисление оставшегося времени");
             } else {
-                powerSourcesBuilder.append(String.format("%d:%02d remaining", (int) (timeRemaining / 3600),
+                powerSourcesBuilder.append(String.format("%d:%02d осталось", (int) (timeRemaining / 3600),
                         (int) (timeRemaining / 60) % 60));
             }
         }

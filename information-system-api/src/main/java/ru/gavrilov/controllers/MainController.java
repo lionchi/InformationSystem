@@ -106,7 +106,7 @@ public class MainController implements Controller {
                         });
                     }
                     break;
-                case MEMORY:
+                case PROCESS:
                     if (this.memoryButton.getOnAction() == null) {
                         this.memoryButton.setOnAction(event -> {
                             processesTable.getItems().clear();
@@ -119,7 +119,7 @@ public class MainController implements Controller {
                         });
                     }
                     break;
-                case HARD_DISKS:
+                case HDD:
                     if (this.hardDisksButton.getOnAction() == null) {
                         this.hardDisksButton.setOnAction(event -> {
                             TaskService<HardDisksTask, AnchorPane> taskService = new TaskService<>(new HardDisksTask(), this.paneHardDisks);
@@ -127,7 +127,7 @@ public class MainController implements Controller {
                         });
                     }
                     break;
-                case USB_DEVICES:
+                case USB_CONTROLLERS:
                     if (this.usbDevicesButton.getOnAction() == null) {
                         this.usbDevicesButton.setOnAction(event -> {
                             TaskService<UsbDevicesTask, AnchorPane> taskService = new TaskService<>(new UsbDevicesTask(), this.paneUsb);
@@ -143,7 +143,7 @@ public class MainController implements Controller {
                         });
                     }
                     break;
-                case SENSORS_AND_PS:
+                case STATUS_PK:
                     if (this.sensorsAndPSButton.getOnAction() == null) {
                         this.sensorsAndPSButton.setOnAction(event -> {
                             TaskService<SensorsAndPsTask, AnchorPane> taskService = new TaskService<>(new SensorsAndPsTask(), this.paneSensors);

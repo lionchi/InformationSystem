@@ -23,27 +23,27 @@ public class ComputerSystemTask extends Task<String> {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("manufacturer: " + computerSystem.getManufacturer() + "\n");
-        stringBuilder.append("model: " + computerSystem.getModel() + "\n");
-        stringBuilder.append("serialnumber: " + computerSystem.getSerialNumber() + "\n");
+        stringBuilder.append("Производитель: " + computerSystem.getManufacturer() + "\n");
+        stringBuilder.append("Модель: " + computerSystem.getModel() + "\n");
+        stringBuilder.append("Серийный номер: " + computerSystem.getSerialNumber() + "\n");
 
         Firmware firmware = computerSystem.getFirmware();
 
-        stringBuilder.append("firmware:" + "\n");
-        stringBuilder.append("  manufacturer: " + firmware.getManufacturer() + "\n");
-        stringBuilder.append("  name: " + firmware.getName() + "\n");
-        stringBuilder.append("  description: " + firmware.getDescription() + "\n");
-        stringBuilder.append("  version: " + firmware.getVersion() + "\n");
-        stringBuilder.append("  release date: " + (firmware.getReleaseDate() == null ? "unknown"
-                : firmware.getReleaseDate() == null ? "unknown" : FormatUtil.formatDate(firmware.getReleaseDate())) + "\n");
+        stringBuilder.append("Прошивка:" + "\n");
+        stringBuilder.append("  производитель: " + firmware.getManufacturer() + "\n");
+        stringBuilder.append("  имя: " + firmware.getName() + "\n");
+        stringBuilder.append("  описание: " + firmware.getDescription() + "\n");
+        stringBuilder.append("  версия: " + firmware.getVersion() + "\n");
+        stringBuilder.append("  дата выпуска: " + (firmware.getReleaseDate() == null ? "неизвестна"
+                : firmware.getReleaseDate() == null ? "неизвестна" : FormatUtil.formatDate(firmware.getReleaseDate())) + "\n");
 
         Baseboard baseboard = computerSystem.getBaseboard();
 
-        stringBuilder.append("baseboard:" + "\n");
-        stringBuilder.append("  manufacturer: " + baseboard.getManufacturer() + "\n");
-        stringBuilder.append("  model: " + baseboard.getModel() + "\n");
-        stringBuilder.append("  version: " + baseboard.getVersion() + "\n");
-        stringBuilder.append("  serialnumber: " + baseboard.getSerialNumber() + "\n");
+        stringBuilder.append("Материнская плата:" + "\n");
+        stringBuilder.append("  производитель: " + baseboard.getManufacturer() + "\n");
+        stringBuilder.append("  модель: " + baseboard.getModel() + "\n");
+        stringBuilder.append("  версия: " + baseboard.getVersion() + "\n");
+        stringBuilder.append("  серийный номер: " + baseboard.getSerialNumber() + "\n");
 
         return stringBuilder.toString();
     }

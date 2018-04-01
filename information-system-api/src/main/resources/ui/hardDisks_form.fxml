@@ -12,15 +12,15 @@
       <TextField fx:id="serialNumber" layoutX="140.0" layoutY="117.0" />
       <TextField fx:id="size" layoutX="140.0" layoutY="165.0" />
       <TextField fx:id="reads" layoutX="140.0" layoutY="213.0" />
-      <Label layoutX="92.0" layoutY="26.0" styleClass="mytext" text="Name" />
-      <Label layoutX="89.0" layoutY="74.0" styleClass="mytext" text="Model" />
-      <Label layoutX="42.0" layoutY="120.0" styleClass="mytext" text="Serial number" />
-      <Label layoutX="105.0" layoutY="168.0" styleClass="mytext" text="Size" />
-      <Label layoutX="92.0" layoutY="216.0" styleClass="mytext" text="Reads" />
-      <Label layoutX="89.0" layoutY="263.0" styleClass="mytext" text="Writes" />
+      <Label layoutX="101.0" layoutY="26.0" styleClass="mytext" text="Имя" />
+      <Label layoutX="81.0" layoutY="72.0" styleClass="mytext" text="Модель" />
+      <Label layoutX="20.0" layoutY="120.0" styleClass="mytext" text="Серийный номер" />
+      <Label layoutX="83.0" layoutY="168.0" styleClass="mytext" text="Размер" />
+      <Label layoutX="84.0" layoutY="216.0" styleClass="mytext" text="Чтение" />
+      <Label layoutX="85.0" layoutY="263.0" styleClass="mytext" text="Запись" />
       <TextField fx:id="writes" layoutX="140.0" layoutY="260.0" />
       <TextField fx:id="transferTime" layoutX="140.0" layoutY="307.0" />
-      <Label layoutX="46.0" layoutY="310.0" styleClass="mytext" text="Transfer time" />
+      <Label layoutX="23.0" layoutY="310.0" styleClass="mytext" text="Время передачи" />
       <Button fx:id="okButton" layoutX="173.0" layoutY="350.0" mnemonicParsing="false" styleClass="ok" text="Ок" />
    </children>
 </AnchorPane>

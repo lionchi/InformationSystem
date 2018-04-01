@@ -15,10 +15,10 @@ public class DisplayTask extends Task<String> {
     protected String call() throws Exception {
         LOG.info("Checking Displays...");
         Display[] displays = hardwareAbstractionLayer.getDisplays();
-        StringBuilder stringBuilder = new StringBuilder("Displays:");
+        StringBuilder stringBuilder = new StringBuilder("Дисплеи:");
         int i = 1;
         for (Display display : displays) {
-            stringBuilder.append(" Display " + i + ":");
+            stringBuilder.append("Дисплей №" + i + ":");
             stringBuilder.append(display.toString());
             i++;
         }
