@@ -2,6 +2,7 @@ package ru.gavrilov.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -111,8 +112,10 @@ public class MainController implements Controller {
                             processesTable.getItems().clear();
                             TaskService<MemoryTask, AnchorPane> taskServiceForMemory = new TaskService<>(new MemoryTask(), this.paneMemory);
                             taskServiceForMemory.taskExecuter(this.processesText, this.threadsText, this.memoryText, this.swapText);
-                            TaskService<ProcessTask, AnchorPane> taskServiceProcess = new TaskService<>(new ProcessTask(), this.paneMemory);
-                            taskServiceProcess.taskExecuterProcess(processesTable, pid, cpu, memory, vsz, name, rss, tableModels);
+                            taskServiceForMemory.getTask().addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED,event1->{
+                                TaskService<ProcessTask, AnchorPane> taskServiceProcess = new TaskService<>(new ProcessTask(), this.paneMemory);
+                                taskServiceProcess.taskExecuterProcess(processesTable, pid, cpu, memory, vsz, name, rss, tableModels);
+                            });
                         });
                     }
                     break;

@@ -43,10 +43,8 @@ public class TaskService<T extends Task, P extends Pane> {
         ProgressIndicator pi = this.initLoader();
         task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, eventTask -> {
             List<String> values = (List<String>) task.getValue();
-            int i = 0;
-            for (TextInputControl inputControl : inputControls) {
-                inputControl.setText(values.get(i));
-                i++;
+            for (int i = 0; i < inputControls.length; i++) {
+                inputControls[i].setText(values.get(i));
             }
             this.loaderClosed(pi);
         });
@@ -104,20 +102,7 @@ public class TaskService<T extends Task, P extends Pane> {
         this.pane.getChildren().remove(pi);
     }
 
-/*    private void initLoader (){
-        GuiForm loader = new GuiForm("loader.fxml");
-        this.stage.setScene(new Scene(loader.getParent()));
-        this.stage.initModality(Modality.WINDOW_MODAL);
-        Window window = this.inputControl != null ? inputControl.getScene().getWindow() : this.node.getScene().getWindow();
-        this.stage.initOwner(window);
-        double centerXPosition = window.getX() + window.getWidth()/2d;
-        double centerYPosition = window.getY() + window.getHeight()/2d;
-        this.stage.setX(centerXPosition);
-        this.stage.setY(centerYPosition);
-        this.stage.show();
+    public T getTask() {
+        return task;
     }
-
-    private void loaderClosed(){
-        this.stage.close();
-    }*/
 }
