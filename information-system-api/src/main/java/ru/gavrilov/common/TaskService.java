@@ -86,8 +86,8 @@ public class TaskService<T extends Task, P extends Pane> {
         double centerYPosition = window.getY() + window.getHeight()/2d;
         pi.setLayoutX(window.getWidth()/2d-30d);
         pi.setLayoutY(window.getHeight()/2d-75d);
-        pi.setStyle("-fx-accent: #0A7552;" +
-                "-fx-control-inner-background: #a1a1a1;");
+        pi.setStyle("-fx-accent: #ffee00;" +
+                "-fx-control-inner-background: #ffffff;");
         pi.setPrefSize(35,35);
         pi.progressProperty();
 

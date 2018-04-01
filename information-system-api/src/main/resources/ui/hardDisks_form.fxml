@@ -5,23 +5,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="384.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.InformationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="384.0" styleClass="AnchorPane" stylesheets="@../css/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.InformationController">
    <children>
-      <TextField fx:id="name" layoutX="140.0" layoutY="30.0" />
-      <TextField fx:id="model" layoutX="140.0" layoutY="79.0" />
-      <TextField fx:id="serialNumber" layoutX="140.0" layoutY="132.0" />
-      <TextField fx:id="size" layoutX="140.0" layoutY="181.0" />
-      <TextField fx:id="reads" layoutX="140.0" layoutY="229.0" />
-      <Label layoutX="99.0" layoutY="34.0" text="Name" />
-      <Label layoutX="99.0" layoutY="83.0" text="Model" />
-      <Label layoutX="55.0" layoutY="136.0" text="Serial number" />
-      <Label layoutX="99.0" layoutY="185.0" text="Size" />
-      <Label layoutX="99.0" layoutY="233.0" text="Reads" />
-      <Label layoutX="99.0" layoutY="275.0" text="Writes" />
-      <TextField fx:id="writes" layoutX="140.0" layoutY="271.0" />
-      <TextField fx:id="transferTime" layoutX="140.0" layoutY="312.0" />
-      <Label layoutX="64.0" layoutY="316.0" text="Transfer time" />
-      <Button fx:id="okButton" layoutX="176.0" layoutY="355.0" mnemonicParsing="false" text="Ок" />
+      <TextField fx:id="name" layoutX="140.0" layoutY="23.0" />
+      <TextField fx:id="model" layoutX="140.0" layoutY="69.0" />
+      <TextField fx:id="serialNumber" layoutX="140.0" layoutY="117.0" />
+      <TextField fx:id="size" layoutX="140.0" layoutY="165.0" />
+      <TextField fx:id="reads" layoutX="140.0" layoutY="213.0" />
+      <Label layoutX="92.0" layoutY="26.0" styleClass="mytext" text="Name" />
+      <Label layoutX="89.0" layoutY="74.0" styleClass="mytext" text="Model" />
+      <Label layoutX="42.0" layoutY="120.0" styleClass="mytext" text="Serial number" />
+      <Label layoutX="105.0" layoutY="168.0" styleClass="mytext" text="Size" />
+      <Label layoutX="92.0" layoutY="216.0" styleClass="mytext" text="Reads" />
+      <Label layoutX="89.0" layoutY="263.0" styleClass="mytext" text="Writes" />
+      <TextField fx:id="writes" layoutX="140.0" layoutY="260.0" />
+      <TextField fx:id="transferTime" layoutX="140.0" layoutY="307.0" />
+      <Label layoutX="46.0" layoutY="310.0" styleClass="mytext" text="Transfer time" />
+      <Button fx:id="okButton" layoutX="173.0" layoutY="350.0" mnemonicParsing="false" styleClass="ok" text="Ок" />
    </children>
 </AnchorPane>
