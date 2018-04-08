@@ -1,5 +1,7 @@
 package ru.gavrilov.software;
 
+import ru.gavrilov.util.FormatUtil;
+
 import java.io.Serializable;
 
 public class OSFileStore implements Serializable {
@@ -143,6 +145,7 @@ public class OSFileStore implements Serializable {
 
     @Override
     public String toString() {
-        return getName();
+        return String.format("%s (%s / %s)", getName(), FormatUtil.formatBytesDecimal(getTotalSpace()),
+                FormatUtil.formatBytesDecimal(getUsableSpace()));
     }
 }

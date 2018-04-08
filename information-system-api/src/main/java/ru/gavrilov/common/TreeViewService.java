@@ -33,7 +33,8 @@ public final class TreeViewService {
                     stage.centerOnScreen();
                     stage.showAndWait();
                 } catch (Exception e) {
-                    new Alert(Alert.AlertType.WARNING, "Двойной клик срабатывает только при нажатии на элемент дерева").showAndWait();
+                    new Alert(Alert.AlertType.WARNING,
+                            "Двойной клик срабатывает только при нажатии на элемент дерева").showAndWait();
                 }
             }
         });
@@ -51,9 +52,9 @@ public final class TreeViewService {
     private static <C> SiFunction<C> applayMethodSet(C cl, InformationController informationController) {
         SiFunction<C> function = null;
         if (cl instanceof HWDiskStore) {
-            function = obj -> informationController.setHardDisksController((HWDiskStore)obj);
+            function = obj -> informationController.setHardDisksController(obj);
         } else if (cl instanceof OSFileStore) {
-            function = obj -> informationController.setFileStore((OSFileStore)obj);
+            function = obj -> informationController.setFileStore(obj);
         }
 
         return function;

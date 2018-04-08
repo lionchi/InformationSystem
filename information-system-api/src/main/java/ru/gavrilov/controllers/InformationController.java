@@ -56,12 +56,12 @@ public class InformationController implements Controller {
         serialNumber.setText(hwDiskStore.getSerial().trim());
         size.setText(hwDiskStore.getSize() > 0 ? FormatUtil.formatBytesDecimal(hwDiskStore.getSize()) : "?");
         String rd = readwrite ? String.valueOf(hwDiskStore.getReads()) : "?";
-        String rdByte = readwrite ? FormatUtil.formatBytes(hwDiskStore.getReadBytes()) : "?";
+        String rdByte = readwrite ? FormatUtil.formatBytesDecimal(hwDiskStore.getReadBytes()) : "?";
         reads.setText(rd + "(" + rdByte + ")");
         String wr = readwrite ? String.valueOf(hwDiskStore.getWrites()) : "?";
-        String wrByte = readwrite ? FormatUtil.formatBytes(hwDiskStore.getWriteBytes()) : "?";
+        String wrByte = readwrite ? FormatUtil.formatBytesDecimal(hwDiskStore.getWriteBytes()) : "?";
         writes.setText(wr + "(" + wrByte + ")");
-        transferTime.setText(readwrite ? String.valueOf(hwDiskStore.getTransferTime()) : "?");
+        transferTime.setText(readwrite ? String.valueOf(hwDiskStore.getTransferTime())+ " milliseconds" : "?");
         okButton.setOnAction(event -> stage.close());
     }
 
@@ -69,9 +69,11 @@ public class InformationController implements Controller {
         name.setText(fileStore.getName());
         description.setText(fileStore.getDescription().isEmpty() ? "file system" : fileStore.getDescription());
         type.setText(fileStore.getType());
-        usable.setText(FormatUtil.formatBytes(fileStore.getUsableSpace()));
-        totalSpace.setText(FormatUtil.formatBytes(fileStore.getTotalSpace()));
-        pr.setText(String.valueOf(BigDecimal.valueOf(100d * fileStore.getUsableSpace() / fileStore.getTotalSpace()).setScale(BigDecimal.ROUND_CEILING,2)));
+        usable.setText(FormatUtil.formatBytesDecimal(fileStore.getUsableSpace()));
+        totalSpace.setText(FormatUtil.formatBytesDecimal(fileStore.getTotalSpace()));
+        if(fileStore.getTotalSpace()!=0){
+            pr.setText(String.valueOf(BigDecimal.valueOf(100d * fileStore.getUsableSpace() / fileStore.getTotalSpace()).setScale(BigDecimal.ROUND_CEILING,2)));
+        }
         volume.setText(fileStore.getVolume());
         logicalVolume.setText(fileStore.getLogicalVolume());
         mount.setText(fileStore.getMount());

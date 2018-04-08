@@ -21,7 +21,7 @@ public class NetworkTask extends Task<String> {
     protected String call() throws Exception {
         LOG.info("Checking Network interfaces...");
         NetworkIF[] networkIFs = hardwareAbstractionLayer.getNetworkIFs();
-        StringBuilder stringBuilder = new StringBuilder("Сетевые интерфейсы:");
+        StringBuilder stringBuilder = new StringBuilder("Сетевые интерфейсы:" + "\n");
 
         for (NetworkIF net : networkIFs) {
             stringBuilder.append(String.format("Имя: %s (%s)%n", net.getName(), net.getDisplayName()));
@@ -31,7 +31,7 @@ public class NetworkTask extends Task<String> {
             stringBuilder.append(String.format("IPv6: %s %n", Arrays.toString(net.getIPv6addr())));
             boolean hasData = net.getBytesRecv() > 0 || net.getBytesSent() > 0 || net.getPacketsRecv() > 0
                     || net.getPacketsSent() > 0;
-            stringBuilder.append(String.format("Трафик: получено %s/%s%s; отправлено %s/%s%s %n",
+            stringBuilder.append(String.format("Трафик: получено %s/%s%s; отправлено %s/%s%s %n%n",
                     hasData ? net.getPacketsRecv() + " пакетов" : "?",
                     hasData ? FormatUtil.formatBytes(net.getBytesRecv()) : "?",
                     hasData ? " (" + net.getInErrors() + " ошибка)" : "",
@@ -49,7 +49,7 @@ public class NetworkTask extends Task<String> {
     private void setNetworkParameters (StringBuilder stringBuilder){
         LOG.info("Checking Network parameterss...");
         NetworkParams networkParams = operatingSystem.getNetworkParams();
-        stringBuilder.append("Параметры сети:");
+        stringBuilder.append("Параметры сети:" + "\n");
         stringBuilder.append(String.format("Имя хоста: %s%n", networkParams.getHostName()));
         stringBuilder.append(String.format("Имя домена: %s%n", networkParams.getDomainName()));
         stringBuilder.append(String.format("DNS серверы: %s%n", Arrays.toString(networkParams.getDnsServers())));

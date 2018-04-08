@@ -8,11 +8,14 @@ import ru.gavrilov.hardware.Baseboard;
 import ru.gavrilov.hardware.ComputerSystem;
 import ru.gavrilov.hardware.Firmware;
 import ru.gavrilov.hardware.HardwareAbstractionLayer;
+import ru.gavrilov.software.OperatingSystem;
+import ru.gavrilov.software.OperatingSystemVersion;
 import ru.gavrilov.util.FormatUtil;
 
 public class ComputerSystemTask extends Task<String> {
 
     private static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
+    private static final OperatingSystem operatingSystem = SystemInfo.INSTANCE.getOperatingSystem();
     private static final Logger LOG = LoggerFactory.getLogger(ComputerSystemTask.class);
 
     @Override
@@ -20,8 +23,11 @@ public class ComputerSystemTask extends Task<String> {
         LOG.info("Checking computer system...");
 
         ComputerSystem computerSystem = hardwareAbstractionLayer.getComputerSystem();
+        OperatingSystemVersion operatingSystemVersion = operatingSystem.getVersion();
 
         StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(operatingSystemVersion + "\n");
 
         stringBuilder.append("Производитель: " + computerSystem.getManufacturer() + "\n");
         stringBuilder.append("Модель: " + computerSystem.getModel() + "\n");
@@ -29,7 +35,7 @@ public class ComputerSystemTask extends Task<String> {
 
         Firmware firmware = computerSystem.getFirmware();
 
-        stringBuilder.append("Прошивка:" + "\n");
+        stringBuilder.append("Bios:" + "\n");
         stringBuilder.append("  производитель: " + firmware.getManufacturer() + "\n");
         stringBuilder.append("  имя: " + firmware.getName() + "\n");
         stringBuilder.append("  описание: " + firmware.getDescription() + "\n");

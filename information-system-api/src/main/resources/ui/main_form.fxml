@@ -76,12 +76,12 @@
                           </columns>
                         </TableView>
                         <TextField fx:id="processesText" layoutX="575.0" layoutY="100.0" prefHeight="25.0" prefWidth="125.0" />
-                        <Label layoutX="507.0" layoutY="103.0" styleClass="mytext" text="Processes:" />
+                        <Label layoutX="491.0" layoutY="103.0" styleClass="mytext" text="Процессов:" />
                         <TextField fx:id="memoryText" layoutX="574.0" layoutY="202.0" prefHeight="25.0" prefWidth="124.0" />
-                        <Label layoutX="513.0" layoutY="205.0" styleClass="mytext" text="Memory:" />
+                        <Label layoutX="513.0" layoutY="205.0" styleClass="mytext" text="Память:" />
                         <Label layoutX="500.0" layoutY="258.0" styleClass="mytext" text="Swap used:" />
                         <TextField fx:id="swapText" layoutX="575.0" layoutY="255.0" prefHeight="25.0" prefWidth="124.0" />
-                        <Label layoutX="515.0" layoutY="154.0" styleClass="mytext" text="Threads:" />
+                        <Label layoutX="506.0" layoutY="154.0" styleClass="mytext" text="Потоков:" />
                         <TextField fx:id="threadsText" layoutX="574.0" layoutY="151.0" prefHeight="25.0" prefWidth="125.0" />
                      </children></AnchorPane>
               </content>
