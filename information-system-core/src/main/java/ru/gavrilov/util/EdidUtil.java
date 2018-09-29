@@ -12,6 +12,9 @@ import java.util.Arrays;
 public class EdidUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(EdidUtil.class);
+    private static String diagonal = "";
+    private static String name = "";
+    private static String manufId = "";
 
     private EdidUtil() {
     }
@@ -139,9 +142,11 @@ public class EdidUtil {
                 .append(EdidUtil.getSerialNo(edid)).append(", Manuf.Date=")
                 .append(EdidUtil.getWeek(edid) * 12 / 52 + 1 + "/").append(EdidUtil.getYear(edid)).append(", EDID v")
                 .append(EdidUtil.getVersion(edid));
+        manufId = EdidUtil.getManufacturerID(edid);
         int hSize = EdidUtil.getHcm(edid);
         int vSize = EdidUtil.getVcm(edid);
         sb.append(String.format("%n  %d x %d cm (%.1f x %.1f in)", hSize, vSize, hSize / 2.54, vSize / 2.54));
+        diagonal = String.format("%d x %d cm", hSize, vSize);
         byte[][] desc = EdidUtil.getDescriptors(edid);
         for (byte[] b : desc) {
             switch (EdidUtil.getDescriptorType(b)) {
@@ -156,6 +161,7 @@ public class EdidUtil {
                 break;
             case 0xfc:
                 sb.append("\n  Имя монитора: ").append(EdidUtil.getDescriptorText(b));
+                name = EdidUtil.getDescriptorText(b);
                 break;
             case 0xfb:
                 sb.append("\n  White Point Data: ").append(EdidUtil.getDescriptorHex(b));
@@ -173,5 +179,17 @@ public class EdidUtil {
             }
         }
         return sb.toString();
+    }
+
+    public static String getDiagonal() {
+        return diagonal;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static String getManufId() {
+        return manufId;
     }
 }

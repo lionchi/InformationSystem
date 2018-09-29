@@ -2,10 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="384.0" styleClass="AnchorPane" stylesheets="@../css/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.InformationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="750.0" styleClass="AnchorPane" stylesheets="@../css/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.InformationController">
    <children>
       <TextField fx:id="name" layoutX="140.0" layoutY="23.0" />
       <TextField fx:id="model" layoutX="140.0" layoutY="69.0" />
@@ -21,6 +23,18 @@
       <TextField fx:id="writes" layoutX="140.0" layoutY="260.0" />
       <TextField fx:id="transferTime" layoutX="140.0" layoutY="307.0" />
       <Label layoutX="23.0" layoutY="310.0" styleClass="mytext" text="Время передачи" />
-      <Button fx:id="okButton" layoutX="173.0" layoutY="350.0" mnemonicParsing="false" styleClass="ok" text="Ок" />
+      <Button fx:id="okButton" layoutX="176.0" layoutY="399.0" mnemonicParsing="false" styleClass="ok" text="Закрыть" />
+      <Button fx:id="startFormattedButton" layoutX="464.0" layoutY="399.0" mnemonicParsing="false" styleClass="ok" text="Запустить форматирование" />
+      <TextField fx:id="isFormatted" layoutX="140.0" layoutY="356.0" />
+      <Label layoutX="23.0" layoutY="358.0" styleClass="mytext" text="Отформатирован" />
+      <Separator layoutX="382.0" layoutY="15.0" orientation="VERTICAL" prefHeight="469.0" prefWidth="0.0" />
+      <Label layoutX="423.0" layoutY="120.0" styleClass="mytext" text="Скорость" />
+      <Label layoutX="423.0" layoutY="216.0" styleClass="mytext" text="Файловая система" />
+      <RadioButton fx:id="quickButton" layoutX="504.0" layoutY="120.0" mnemonicParsing="false" styleClass="mytext" text="Быстро" />
+      <RadioButton fx:id="normalButton" layoutX="632.0" layoutY="120.0" mnemonicParsing="false" selected="true" styleClass="mytext" text="Нормально" />
+      <Label layoutX="428.0" layoutY="310.0" styleClass="mytext" text="Новое имя" />
+      <TextField fx:id="newName" layoutX="571.0" layoutY="307.0" />
+      <RadioButton fx:id="fat32Button" layoutX="570.0" layoutY="216.0" mnemonicParsing="false" selected="true" styleClass="mytext" text="FAT32" />
+      <RadioButton fx:id="ntfsButton" layoutX="662.0" layoutY="216.0" mnemonicParsing="false" styleClass="mytext" text="NTFS" />
    </children>
 </AnchorPane>

@@ -20,6 +20,7 @@ public class HWDiskStore implements Serializable, Comparable<HWDiskStore> {
     private long transferTime;
     private HWPartition[] partitions;
     private long timeStamp;
+    private boolean isFormatted;
 
     public HWDiskStore() {
         this("", "", "", 0L, 0L, 0L, 0L, 0L, 0L, new HWPartition[0], 0L);
@@ -127,6 +128,14 @@ public class HWDiskStore implements Serializable, Comparable<HWDiskStore> {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public boolean isFormatted() {
+        return isFormatted;
+    }
+
+    public void setFormatted(boolean formatted) {
+        isFormatted = formatted;
     }
 
     @Override
