@@ -1,6 +1,7 @@
 package ru.gavrilov.controllers;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -33,6 +34,7 @@ public class InformationController implements Controller {
     public TextField transferTime;
     public TextField isFormatted;
     public TextField newName;
+    public ProgressBar progressBar = new ProgressBar();
     public RadioButton fat32Button;
     public RadioButton ntfsButton;
     public RadioButton quickButton;
@@ -66,7 +68,7 @@ public class InformationController implements Controller {
 
     private void initFieldForHardDisks() {
         AtomicReference<String> type = new AtomicReference<>("/fs:FAT32");
-        AtomicReference<String> speed = new AtomicReference<>("");
+        AtomicReference<String> speed = new AtomicReference<>(" " + "/q");
         boolean readwrite = hwDiskStore.getReads() > 0 || hwDiskStore.getWrites() > 0;
         name.setText(hwDiskStore.getName());
         model.setText(hwDiskStore.getModel());
@@ -102,10 +104,14 @@ public class InformationController implements Controller {
         isFormatted.setText(hwDiskStore.isFormatted() ? "да" : "нет");
         okButton.setOnAction(event -> stage.close());
         startFormattedButton.setOnAction(event -> {
+            progressBar.setProgress(-1.0f);
+            okButton.setDisable(true);
+            startFormattedButton.setDisable(true);
+            newName.setEditable(false);
             for (HWPartition hwPartition : hwDiskStore.getPartitions()) {
                 if (!hwPartition.getMountPoint().isEmpty()) {
                     FileManager.createBatch(hwPartition.getMountPoint().replace("\\", ""), speed.get(),
-                            type.get(), newName.getText().isEmpty() ? "Blank disk" : newName.getText());
+                            type.get(), newName.getText().isEmpty() ? "BlankDisk" : newName.getText(), progressBar, okButton, startFormattedButton, newName);
                 }
             }
             hwDiskStore.setFormatted(true);
@@ -116,6 +122,7 @@ public class InformationController implements Controller {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
                     String currentDateAndTime = simpleDateFormat.format(date);
                     hd.setDateOfFormatting(currentDateAndTime);
+                    hd.setFormatted(hwDiskStore.isFormatted());
                 }
             });
         });

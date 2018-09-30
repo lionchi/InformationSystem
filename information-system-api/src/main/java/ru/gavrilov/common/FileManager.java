@@ -1,5 +1,9 @@
 package ru.gavrilov.common;
 
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
 import ru.gavrilov.HWPartition;
 import ru.gavrilov.entrys.PK;
 import ru.gavrilov.hardware.HWDiskStore;
@@ -7,6 +11,7 @@ import ru.gavrilov.hardware.HWDiskStore;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.Executors;
 
 public class FileManager {
     private String mountPoint;
@@ -77,19 +82,25 @@ public class FileManager {
         }
     }
 
-    public static void createBatch(String drive, String speed, String type, String name) {
+    public static void createBatch(String drive, String speed, String type, String name, ProgressBar progressBar,
+                                   Button okButton, Button startFormattedButton, TextField newName) {
         try {
-            // Create file
             FileWriter fw = new FileWriter("Phoenix.bat");
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("Format /y" + " " + drive + speed + " " + type + "/v:" + name);
             bw.close();
-            executeBatch();
+            Executors.newCachedThreadPool().submit(() -> {
+                try {
+                    executeBatch(progressBar, okButton, startFormattedButton, newName);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });
         } catch (Exception e) {
         }
     }
 
-    private static void executeBatch() throws InterruptedException
+    private static void executeBatch(ProgressBar progressBar, Button okButton, Button startFormattedButton, TextField newName) throws InterruptedException
     {
         Process p;
         try {
@@ -97,6 +108,12 @@ public class FileManager {
             p.waitFor();
             File f1 = new File("Phoenix.bat");
             f1.delete();
+            Platform.runLater(() -> {
+                okButton.setDisable(false);
+                startFormattedButton.setDisable(false);
+                newName.setEditable(true);
+                progressBar.setProgress(0);
+            });
         } catch (IOException ex) {
         }
     }

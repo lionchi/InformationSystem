@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import ru.gavrilov.common.FileManager;
 import ru.gavrilov.common.Guard;
 import ru.gavrilov.common.GuiForm;
@@ -21,6 +23,7 @@ import java.util.concurrent.Executors;
 public class MainApp extends Application {
 
     private FileManager fileManager = new FileManager();
+    private static final PK pk = PK.INSTANCE;
 
     public static void main(String[] args) {
         launch(args);
@@ -49,11 +52,15 @@ public class MainApp extends Application {
         });
     }
 
-    private void closeApp() {
-        fileManager.write();
-        //fileManager.read();
-        Platform.exit();
-        System.exit(0);
+    private void closeApp(WindowEvent event) {
+        if (pk.canSave()) {
+            fileManager.write();
+            Platform.exit();
+            System.exit(0);
+        }
+        event.consume();
+        new Alert(Alert.AlertType.WARNING,
+                "Не вся основная информация была просканирована. Основная информация находится на вкладках ПК,CPU,HDD").showAndWait();
     }
 
     private void configPrimary(Stage primaryStage) {
@@ -61,6 +68,6 @@ public class MainApp extends Application {
         Guard.notNull(url, "Icon file not found!");
         primaryStage.getIcons().addAll(new Image(url.toString()));
         primaryStage.setTitle("Информация о системе");
-        primaryStage.setOnCloseRequest(event -> closeApp());
+        primaryStage.setOnCloseRequest(this::closeApp);
     }
 }

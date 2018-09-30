@@ -1,5 +1,7 @@
 package ru.gavrilov.entrys;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -36,6 +38,11 @@ public class PK implements Serializable {
         this.hardDisks = hardDisks;
         this.networkInterfaces = networkInterfaces;
         this.displays = displays;
+    }
+
+    public boolean canSave() {
+        return ObjectUtils.allNotNull(versionBios, versionOs, motherboardManufacturer, motherboardSerialNumber, cpu, hardDisks)
+                && hardDisks.size() > 0;
     }
 
     public String getVersionBios() {

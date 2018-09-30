@@ -20,7 +20,7 @@ public final class TreeViewService {
                 try {
                     C cl = (C) treeView.getSelectionModel().getSelectedItem().getValue();
                     GuiForm<AnchorPane, InformationController> form = new GuiForm<>(getFileName(cl));
-                    Stage stage = new Stage(StageStyle.UTILITY);
+                    Stage stage = new Stage(StageStyle.TRANSPARENT);
                     AnchorPane parent = form.getParent();
                     InformationController controller = form.getController();
                     applayMethodSet(cl,controller).applay(cl);
