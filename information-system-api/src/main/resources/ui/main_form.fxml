@@ -90,7 +90,7 @@
               <content>
                 <AnchorPane fx:id="paneHardDisks" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="hardDisksButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить инфорамцию" />
+                        <Button fx:id="hardDisksButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
                         <TreeView fx:id="treeViewDisks" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" />
                      </children></AnchorPane>
               </content>

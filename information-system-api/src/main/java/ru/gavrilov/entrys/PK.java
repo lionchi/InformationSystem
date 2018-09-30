@@ -41,7 +41,7 @@ public class PK implements Serializable {
     }
 
     public boolean canSave() {
-        return ObjectUtils.allNotNull(versionBios, versionOs, motherboardManufacturer, motherboardSerialNumber, cpu, hardDisks)
+        return ObjectUtils.allNotNull(versionBios, motherboardManufacturer, motherboardSerialNumber, cpu, hardDisks)
                 && hardDisks.size() > 0;
     }
 
