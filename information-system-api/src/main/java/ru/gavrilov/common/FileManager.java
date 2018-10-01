@@ -85,6 +85,10 @@ public class FileManager {
     public static void createBatch(String drive, String speed, String type, String name, ProgressBar progressBar,
                                    Button okButton, Button startFormattedButton, TextField newName) {
         try {
+            progressBar.setProgress(-1.0f);
+            okButton.setDisable(true);
+            startFormattedButton.setDisable(true);
+            newName.setEditable(false);
             FileWriter fw = new FileWriter("Phoenix.bat");
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write("Format /y" + " " + drive + speed + " " + type + "/v:" + name);

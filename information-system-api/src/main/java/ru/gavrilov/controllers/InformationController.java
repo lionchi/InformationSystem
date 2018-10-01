@@ -104,10 +104,6 @@ public class InformationController implements Controller {
         isFormatted.setText(hwDiskStore.isFormatted() ? "да" : "нет");
         okButton.setOnAction(event -> stage.close());
         startFormattedButton.setOnAction(event -> {
-            progressBar.setProgress(-1.0f);
-            okButton.setDisable(true);
-            startFormattedButton.setDisable(true);
-            newName.setEditable(false);
             for (HWPartition hwPartition : hwDiskStore.getPartitions()) {
                 if (!hwPartition.getMountPoint().isEmpty()) {
                     FileManager.createBatch(hwPartition.getMountPoint().replace("\\", ""), speed.get(),
