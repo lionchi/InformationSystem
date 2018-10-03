@@ -1,8 +1,9 @@
 package ru.gavrilov.entrys;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-public class HDD  implements Serializable {
+@JsonAutoDetect
+public class HDD {
     private String model;
     private String serialNumber;
     private String size;

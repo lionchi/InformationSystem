@@ -1,8 +1,9 @@
 package ru.gavrilov.entrys;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-public class Display implements Serializable {
+@JsonAutoDetect
+public class Display {
     private String manufId;
     private String name;
     private String diagonal;

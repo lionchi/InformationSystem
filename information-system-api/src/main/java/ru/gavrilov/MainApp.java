@@ -10,6 +10,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -18,6 +19,7 @@ import ru.gavrilov.common.Guard;
 import ru.gavrilov.common.GuiForm;
 import ru.gavrilov.controllers.ErrorStartAppFormController;
 import ru.gavrilov.controllers.MainController;
+import ru.gavrilov.controllers.SerialNumberFormController;
 import ru.gavrilov.entrys.PK;
 import ru.gavrilov.tasks.SearchUsbDeviceTask;
 
@@ -30,6 +32,7 @@ public class MainApp extends Application {
 
     private FileManager fileManager = new FileManager();
     private boolean goodStartApp = true;
+    private Stage mainStage;
     private static final PK pk = PK.INSTANCE;
 
     public static void main(String[] args) {
@@ -75,6 +78,7 @@ public class MainApp extends Application {
     private void closeApp(WindowEvent event) {
         if (pk.canSave()) {
             exit();
+            return;
         }
         Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Не вся основная информация была просканирована. Основная информация находится на вкладках ПК,CPU,HDD. " +
                 "Вы точно хотите закрыть приложение?");
@@ -91,9 +95,16 @@ public class MainApp extends Application {
     }
 
     private void exit() {
-        fileManager.write();
-        Platform.exit();
-        System.exit(0);
+        GuiForm<AnchorPane, SerialNumberFormController> loader = new GuiForm("serial_number_form.fxml");
+        Stage stage = new Stage(StageStyle.TRANSPARENT);
+        AnchorPane root = loader.getParent();
+        SerialNumberFormController controller = loader.getController();
+        controller.setStage(stage);
+        controller.setFileManager(fileManager);
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.centerOnScreen();
+        stage.show();
     }
 
     private void configPrimary(Stage primaryStage) {
@@ -102,5 +113,6 @@ public class MainApp extends Application {
         primaryStage.getIcons().addAll(new Image(url.toString()));
         primaryStage.setTitle("Информация о системе");
         primaryStage.setOnCloseRequest(this::closeApp);
+        mainStage = primaryStage;
     }
 }

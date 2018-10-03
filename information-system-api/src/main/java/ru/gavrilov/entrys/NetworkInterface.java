@@ -1,8 +1,9 @@
 package ru.gavrilov.entrys;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
-public class NetworkInterface implements Serializable {
+@JsonAutoDetect
+public class NetworkInterface {
     private String name;
     private String macAddress;
     private String ipv4;

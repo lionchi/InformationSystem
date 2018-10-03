@@ -1,5 +1,8 @@
 package ru.gavrilov.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
@@ -27,37 +30,26 @@ public class FileManager {
         this.mountPoint = mountPoint;
         this.nameFolder = nameFolder;
         this.folder = folder;
-        createFile();
     }
 
     private void createFile() {
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH_mm_ss");
         String currentDateAndTime = simpleDateFormat.format(date);
         File createFile = new File(folder, currentDateAndTime);
         setFile(createFile);
     }
 
-    public void write() {
+    public void writeJson() {
+        File createFile = new File(folder, pk.getSerialNumberPk());
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
-            FileOutputStream fos = new FileOutputStream(this.file);
-            ObjectOutputStream serial = new ObjectOutputStream(fos);
-            serial.writeObject(pk);
-            serial.flush();
-            serial.close();
-        } catch (Exception ex) {
-            System.out.println("Ошибка при сериализации объекта");
-        }
-    }
-
-    public void read() {
-        try {
-            FileInputStream ios = new FileInputStream(this.file);
-            ObjectInputStream serial = new ObjectInputStream(ios);
-            PK pk = (PK) serial.readObject();
-            serial.close();
-        } catch (Exception ex) {
-            System.out.println("Ошибка при сериализации объекта");
+            mapper.writeValue(createFile, pk);
+            System.out.println("Сериализация прошла успешна!");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
