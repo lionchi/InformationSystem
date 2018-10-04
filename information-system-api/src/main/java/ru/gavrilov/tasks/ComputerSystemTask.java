@@ -33,8 +33,11 @@ public class ComputerSystemTask extends Task<String> {
         pk.setVersionOs(operatingSystemVersion.toString());
 
         stringBuilder.append("Производитель: " + computerSystem.getManufacturer() + "\n");
+        pk.setManufacture(computerSystem.getManufacturer());
         stringBuilder.append("Модель: " + computerSystem.getModel() + "\n");
+        pk.setModelPk(computerSystem.getModel());
         stringBuilder.append("Серийный номер: " + computerSystem.getSerialNumber() + "\n");
+        pk.setSerialNumberPk(computerSystem.getSerialNumber());
 
         Firmware firmware = computerSystem.getFirmware();
 

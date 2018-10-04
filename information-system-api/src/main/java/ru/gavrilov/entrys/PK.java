@@ -12,39 +12,26 @@ public class PK {
     public static final PK INSTANCE = new PK();
     private String inventoryNumber;
     private String location;
+    private String serialNumberPk;
+    private String modelPk;
+    private String manufacture;
+    private boolean isLaptop = false;
+    //Motherboard
     private String versionBios;
     private String versionOs;
     private String motherboardManufacturer;
     private String motherboardSerialNumber;
+    //Не используются
     private String nameHost;
     private String nameDomain;
     private String dnsServers;
-    private boolean isLaptop = false;
+    //Остальные комплектующие
     private CPU cpu;
     private ArrayList<HDD> hardDisks;
     private ArrayList<NetworkInterface> networkInterfaces;
     private ArrayList<Display> displays;
 
     public PK() {
-    }
-
-    public PK(String inventoryNumber, String location, String versionBios, String versionOs, String motherboardManufacturer, String motherboardSerialNumber,
-              String nameHost, String nameDomain, String dnsServers, boolean isLaptop, CPU cpu, ArrayList<HDD> hardDisks,
-              ArrayList<NetworkInterface> networkInterfaces, ArrayList<Display> displays) {
-        this.inventoryNumber = inventoryNumber;
-        this.location = location;
-        this.versionBios = versionBios;
-        this.versionOs = versionOs;
-        this.motherboardManufacturer = motherboardManufacturer;
-        this.motherboardSerialNumber = motherboardSerialNumber;
-        this.nameHost = nameHost;
-        this.nameDomain = nameDomain;
-        this.dnsServers = dnsServers;
-        this.isLaptop = isLaptop;
-        this.cpu = cpu;
-        this.hardDisks = hardDisks;
-        this.networkInterfaces = networkInterfaces;
-        this.displays = displays;
     }
 
     public boolean canSave() {
@@ -66,6 +53,33 @@ public class PK {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getSerialNumberPk() {
+        return serialNumberPk;
+    }
+
+    public void setSerialNumberPk(String serialNumberPk) {
+        if(!serialNumberPk.equals("Default string")) {
+            setLaptop(true);
+        }
+        this.serialNumberPk = serialNumberPk;
+    }
+
+    public String getModelPk() {
+        return modelPk;
+    }
+
+    public void setModelPk(String modelPk) {
+        this.modelPk = modelPk;
+    }
+
+    public String getManufacture() {
+        return manufacture;
+    }
+
+    public void setManufacture(String manufacture) {
+        this.manufacture = manufacture;
     }
 
     public String getVersionBios() {
@@ -129,9 +143,6 @@ public class PK {
     }
 
     public void setDisplays(ArrayList<Display> displays) {
-        if (displays.size() == 0) {
-            setLaptop(true);
-        }
         this.displays = displays;
     }
 
