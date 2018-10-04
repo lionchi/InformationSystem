@@ -49,6 +49,8 @@ public class MainController implements Controller {
     public Button displayButton;
     public TreeView<String> treeView;
     public Button usbDevicesButton;
+    public Button videoCardButton;
+    public TextArea videoCardText;
 
     public AnchorPane paneComputer;
     public AnchorPane paneFileSystem;
@@ -59,6 +61,8 @@ public class MainController implements Controller {
     public AnchorPane paneNetwork;
     public AnchorPane paneSensors;
     public AnchorPane paneDisplay;
+    public AnchorPane paneVideoCard;
+
 
     private ObservableList<ProcessEntry> tableModels = FXCollections.observableArrayList();
     private List<TabEnum> tabEnumList = Arrays.asList(TabEnum.values());
@@ -148,6 +152,14 @@ public class MainController implements Controller {
                         this.sensorsAndPSButton.setOnAction(event -> {
                             TaskService<SensorsAndPsTask, AnchorPane> taskService = new TaskService<>(new SensorsAndPsTask(), this.paneSensors);
                             taskService.taskExecuter(this.sensorsAndPSText);
+                        });
+                    }
+                    break;
+                case VIDEO_CARD:
+                    if (this.videoCardButton.getOnAction() == null) {
+                        this.videoCardButton.setOnAction(event -> {
+                            TaskService<VideoCardTask, AnchorPane> taskService = new TaskService<>(new VideoCardTask(), this.paneVideoCard);
+                            taskService.taskExecuter(this.videoCardText);
                         });
                     }
                     break;

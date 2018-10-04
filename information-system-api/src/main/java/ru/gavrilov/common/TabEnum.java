@@ -9,6 +9,7 @@ public enum TabEnum {
     USB_CONTROLLERS("Контроллеры USB"),
     NETWORK("Интернет"),
     STATUS_PK("Состояние ПК"),
+    VIDEO_CARD("Видеокарта"),
     DISPLAY("Дисплей");
 
     private String nameTab;

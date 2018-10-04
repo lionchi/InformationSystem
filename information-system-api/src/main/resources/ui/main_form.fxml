@@ -13,7 +13,7 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="734.0" styleClass="AnchorPane" stylesheets="@../css/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" styleClass="AnchorPane" stylesheets="@../css/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.MainController">
    <children>
       <TabPane fx:id="tabPane" layoutX="-8.0" prefHeight="400.0" prefWidth="742.0" stylesheets="@../css/MyStyle.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <tabs>
@@ -21,11 +21,11 @@
               <content>
                 <AnchorPane fx:id="paneComputer" minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="750.0" styleClass="paneComputer" stylesheets="@../css/MyStyle.css">
                      <children>
-                        <Button fx:id="computerSystemButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" stylesheets="@../css/MyStyle.css" text="Получить информацию">
+                        <Button fx:id="computerSystemButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" stylesheets="@../css/MyStyle.css" text="Получить информацию">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <TextArea fx:id="computerSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
+                        <TextArea fx:id="computerSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -33,11 +33,11 @@
               <content>
                 <AnchorPane fx:id="paneFileSystem" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="paneComputer" stylesheets="@../css/MyStyle.css">
                      <children>
-                        <Button fx:id="fileSystemButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию">
+                        <Button fx:id="fileSystemButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <TreeView fx:id="treeViewFileSystem" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" stylesheets="@../css/MyStyle.css">
+                        <TreeView fx:id="treeViewFileSystem" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -52,8 +52,8 @@
             <content>
               <AnchorPane fx:id="paneCpu" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="cpuText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" wrapText="true" />
-                        <Button fx:id="cpuButton" layoutX="275.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию">
+                        <TextArea fx:id="cpuText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" wrapText="true" />
+                        <Button fx:id="cpuButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
@@ -64,7 +64,7 @@
               <content>
                 <AnchorPane fx:id="paneMemory" minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="470.0">
                      <children>
-                        <Button fx:id="memoryButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" stylesheets="@../css/MyStyle.css" text="Получить информацию" />
+                        <Button fx:id="memoryButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" stylesheets="@../css/MyStyle.css" text="Получить информацию" />
                         <TableView fx:id="processesTable" layoutX="22.0" layoutY="51.0" prefHeight="240.0" prefWidth="452.0">
                           <columns>
                             <TableColumn fx:id="pid" prefWidth="60.0" text="PID" />
@@ -90,8 +90,8 @@
               <content>
                 <AnchorPane fx:id="paneHardDisks" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="hardDisksButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
-                        <TreeView fx:id="treeViewDisks" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" />
+                        <Button fx:id="hardDisksButton" layoutX="318.0" layoutY="329.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
+                        <TreeView fx:id="treeViewDisks" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -99,8 +99,8 @@
               <content>
                 <AnchorPane fx:id="paneUsb" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="usbDevicesButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
-                        <TreeView fx:id="treeView" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" />
+                        <Button fx:id="usbDevicesButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
+                        <TreeView fx:id="treeView" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -108,8 +108,8 @@
               <content>
                 <AnchorPane fx:id="paneNetwork" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="networkText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" wrapText="true" />
-                        <Button fx:id="networkButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
+                        <TextArea fx:id="networkText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" wrapText="true" />
+                        <Button fx:id="networkButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -117,17 +117,29 @@
               <content>
                 <AnchorPane fx:id="paneSensors" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="sensorsAndPSButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
-                        <TextArea fx:id="sensorsAndPSText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="692.0" />
+                        <Button fx:id="sensorsAndPSButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
+                        <TextArea fx:id="sensorsAndPSText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
-          <Tab id="8" fx:id="displayTab" text="Дисплей">
+            <Tab id="8" fx:id="videoCardTab" text="Видеокарта">
+                <content>
+                    <AnchorPane fx:id="paneVideoCard" minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="750.0" styleClass="paneComputer" stylesheets="@../css/MyStyle.css">
+                        <children>
+                            <Button fx:id="videoCardButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" stylesheets="@../css/MyStyle.css" text="Получить информацию">
+                                <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                </cursor></Button>
+                            <TextArea fx:id="videoCardText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
+                        </children></AnchorPane>
+                </content>
+            </Tab>
+          <Tab id="9" fx:id="displayTab" text="Дисплей">
             <content>
               <AnchorPane fx:id="paneDisplay" minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="747.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="51.0">
                      <children>
-                        <TextArea fx:id="displayText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="691.0" />
-                        <Button fx:id="displayButton" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
+                        <TextArea fx:id="displayText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
+                        <Button fx:id="displayButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
                      </children></AnchorPane>
             </content>
           </Tab>

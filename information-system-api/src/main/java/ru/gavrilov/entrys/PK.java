@@ -30,6 +30,7 @@ public class PK {
     private ArrayList<HDD> hardDisks;
     private ArrayList<NetworkInterface> networkInterfaces;
     private ArrayList<Display> displays;
+    private ArrayList<VideoCard> videoCards;
 
     public PK() {
     }
@@ -176,5 +177,13 @@ public class PK {
 
     public void setDnsServers(String dnsServers) {
         this.dnsServers = dnsServers;
+    }
+
+    public ArrayList<VideoCard> getVideoCards() {
+        return videoCards;
+    }
+
+    public void setVideoCards(ArrayList<VideoCard> videoCards) {
+        this.videoCards = videoCards;
     }
 }
