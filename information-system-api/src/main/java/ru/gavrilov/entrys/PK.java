@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class PK {
     @JsonIgnore
     public static final PK INSTANCE = new PK();
-    private String serialNumberPk;
+    private String inventoryNumber;
+    private String location;
     private String versionBios;
     private String versionOs;
     private String motherboardManufacturer;
@@ -27,10 +28,11 @@ public class PK {
     public PK() {
     }
 
-    public PK(String serialNumberPk, String versionBios, String versionOs, String motherboardManufacturer, String motherboardSerialNumber,
+    public PK(String inventoryNumber, String location, String versionBios, String versionOs, String motherboardManufacturer, String motherboardSerialNumber,
               String nameHost, String nameDomain, String dnsServers, boolean isLaptop, CPU cpu, ArrayList<HDD> hardDisks,
               ArrayList<NetworkInterface> networkInterfaces, ArrayList<Display> displays) {
-        this.serialNumberPk = serialNumberPk;
+        this.inventoryNumber = inventoryNumber;
+        this.location = location;
         this.versionBios = versionBios;
         this.versionOs = versionOs;
         this.motherboardManufacturer = motherboardManufacturer;
@@ -50,12 +52,20 @@ public class PK {
                 && hardDisks.size() > 0;
     }
 
-    public String getSerialNumberPk() {
-        return serialNumberPk;
+    public String getInventoryNumber() {
+        return inventoryNumber;
     }
 
-    public void setSerialNumberPk(String serialNumberPk) {
-        this.serialNumberPk = serialNumberPk;
+    public void setInventoryNumber(String inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getVersionBios() {

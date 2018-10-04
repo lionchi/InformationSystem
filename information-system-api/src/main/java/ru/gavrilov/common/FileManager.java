@@ -41,7 +41,7 @@ public class FileManager {
     }
 
     public void writeJson() {
-        File createFile = new File(folder, pk.getSerialNumberPk());
+        File createFile = new File(folder, String.format("%s (Инв.№ %s)", pk.getLocation(), pk.getInventoryNumber()));
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -96,8 +96,7 @@ public class FileManager {
         }
     }
 
-    private static void executeBatch(ProgressBar progressBar, Button okButton, Button startFormattedButton, TextField newName) throws InterruptedException
-    {
+    private static void executeBatch(ProgressBar progressBar, Button okButton, Button startFormattedButton, TextField newName) throws InterruptedException {
         Process p;
         try {
             p = Runtime.getRuntime().exec("Phoenix.bat");

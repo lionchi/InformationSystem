@@ -15,19 +15,23 @@ public class SerialNumberFormController implements Controller {
     private FileManager fileManager = new FileManager();
     private static final PK pk = PK.INSTANCE;
 
-    public TextField serialNumber;
+    public TextField inventoryNumber;
+    public TextField locationField;
     public Button okButton;
 
     @FXML
     private void initialize() {
         okButton.setOnAction(event -> {
-            if(!serialNumber.getText().equals("") && serialNumber.getText()!=null) {
-                pk.setSerialNumberPk(serialNumber.getText());
+            if ((!inventoryNumber.getText().equals("") && !locationField.getText().equals(""))
+                    && (inventoryNumber.getText() != null && locationField.getText() != null)) {
+                pk.setInventoryNumber(inventoryNumber.getText());
+                pk.setLocation(locationField.getText().toUpperCase());
                 fileManager.writeJson();
                 Platform.exit();
                 System.exit(0);
             } else {
-                new Alert(Alert.AlertType.ERROR, "Необходимо указать серийный номер ПК").showAndWait();
+                new Alert(Alert.AlertType.ERROR, "Необходимо указать инвентарный номер и расположение")
+                        .showAndWait();
             }
         });
     }

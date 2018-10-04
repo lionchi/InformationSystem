@@ -5,11 +5,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="200.0" prefWidth="350.0" styleClass="AnchorPane" stylesheets="@../css/MyStyle.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.gavrilov.controllers.SerialNumberFormController">
    <children>
-      <Label layoutX="79.0" layoutY="51.0" styleClass="mytext" text="Введите серийный номер ПК" />
-      <TextField fx:id="serialNumber" focusTraversable="false" layoutX="25.0" layoutY="96.0" prefHeight="25.0" prefWidth="300.0" promptText="Обязательное поле для заполнения" />
-      <Button fx:id="okButton" layoutX="156.0" layoutY="139.0" mnemonicParsing="false" styleClass="ok" text="Ок" />
+      <Label layoutX="57.0" layoutY="14.0" styleClass="mytext" text="Инвентарный номер оборудования" />
+      <TextField fx:id="inventoryNumber" focusTraversable="false" layoutX="25.0" layoutY="45.0" prefHeight="25.0" prefWidth="300.0" promptText="Обязательное поле для заполнения" />
+      <Button fx:id="okButton" layoutX="156.0" layoutY="150.0" mnemonicParsing="false" styleClass="ok" text="Ок" />
+      <Label layoutX="127.0" layoutY="80.0" styleClass="mytext" text="Расположение" />
+      <TextField fx:id="locationField" layoutX="22.0" layoutY="110.0" prefHeight="25.0" prefWidth="300.0" promptText="Обязательное поле для заполнения" />
    </children>
 </AnchorPane>
