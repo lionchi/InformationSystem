@@ -15,6 +15,7 @@ public class EdidUtil {
     private static String diagonal = "";
     private static String name = "";
     private static String manufId = "";
+    private static String displayId = "";
 
     private EdidUtil() {
     }
@@ -143,6 +144,7 @@ public class EdidUtil {
                 .append(EdidUtil.getWeek(edid) * 12 / 52 + 1 + "/").append(EdidUtil.getYear(edid)).append(", EDID v")
                 .append(EdidUtil.getVersion(edid));
         manufId = EdidUtil.getManufacturerID(edid);
+        displayId = EdidUtil.getProductID(edid);
         int hSize = EdidUtil.getHcm(edid);
         int vSize = EdidUtil.getVcm(edid);
         sb.append(String.format("%n  %d x %d cm (%.1f x %.1f in)", hSize, vSize, hSize / 2.54, vSize / 2.54));
@@ -191,5 +193,9 @@ public class EdidUtil {
 
     public static String getManufId() {
         return manufId;
+    }
+
+    public static String getDisplayId() {
+        return displayId;
     }
 }

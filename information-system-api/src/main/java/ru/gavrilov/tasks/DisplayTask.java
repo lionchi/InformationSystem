@@ -27,7 +27,7 @@ public class DisplayTask extends Task<String> {
             stringBuilder.append("Дисплей №" + i + ":");
             stringBuilder.append(display.toString());
             i++;
-            listDisplays.add(new ru.gavrilov.entrys.Display(EdidUtil.getManufId(), EdidUtil.getName(), EdidUtil.getDiagonal()));
+            listDisplays.add(new ru.gavrilov.entrys.Display(EdidUtil.getManufId(), EdidUtil.getName(), EdidUtil.getDiagonal(), EdidUtil.getDisplayId()));
         }
 
         pk.setDisplays(listDisplays);

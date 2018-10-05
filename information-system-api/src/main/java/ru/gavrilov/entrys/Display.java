@@ -7,14 +7,16 @@ public class Display {
     private String manufId;
     private String name;
     private String diagonal;
+    private String displayId;
 
     public Display() {
     }
 
-    public Display(String manufId, String name, String diagonal) {
+    public Display(String manufId, String name, String diagonal, String displayId) {
         this.manufId = manufId;
         this.name = name;
         this.diagonal = diagonal;
+        this.displayId = displayId;
     }
 
     public String getManufId() {
@@ -39,5 +41,13 @@ public class Display {
 
     public void setDiagonal(String diagonal) {
         this.diagonal = diagonal;
+    }
+
+    public String getDisplayId() {
+        return displayId;
+    }
+
+    public void setDisplayId(String displayId) {
+        this.displayId = displayId;
     }
 }
