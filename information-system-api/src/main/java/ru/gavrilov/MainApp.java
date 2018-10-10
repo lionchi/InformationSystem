@@ -76,7 +76,7 @@ public class MainApp extends Application {
             exit();
             return;
         }
-        Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Не вся основная информация была просканирована. Основная информация находится на вкладках ПК,CPU,HDD. " +
+        Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Не вся основная информация была просканирована. Основная информация находится на вкладках ПК,CPU,HDD,Видеокарта " +
                 "Вы точно хотите закрыть приложение?");
         alertApproval.setTitle("WARNING!");
         alertApproval.setHeaderText(null);

@@ -36,8 +36,8 @@ public class PK {
     }
 
     public boolean canSave() {
-        return ObjectUtils.allNotNull(versionBios, motherboardManufacturer, motherboardSerialNumber, cpu, hardDisks)
-                && hardDisks.size() > 0;
+        return ObjectUtils.allNotNull(versionBios, motherboardManufacturer, motherboardSerialNumber, cpu, hardDisks, videoCards)
+                && hardDisks.size() > 0 && videoCards.size() > 0;
     }
 
     public String getInventoryNumber() {
