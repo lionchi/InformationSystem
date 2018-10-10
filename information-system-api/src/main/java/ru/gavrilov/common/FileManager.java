@@ -47,6 +47,7 @@ public class FileManager {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
             mapper.writeValue(createFile, pk);
+            StegenographicLabelService.initLabel(createFile);
             System.out.println("Сериализация прошла успешна!");
         } catch (Exception e) {
             e.printStackTrace();

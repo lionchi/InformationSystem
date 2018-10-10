@@ -1,9 +1,7 @@
 package ru.gavrilov;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
@@ -23,7 +21,6 @@ import ru.gavrilov.controllers.SerialNumberFormController;
 import ru.gavrilov.entrys.PK;
 import ru.gavrilov.tasks.SearchUsbDeviceTask;
 
-import java.io.File;
 import java.net.URL;
 import java.util.Optional;
 import java.util.concurrent.Executors;
@@ -42,7 +39,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         configPrimary(primaryStage);
-
         SearchUsbDeviceTask searchUsbDeviceTask = new SearchUsbDeviceTask();
         Executors.newCachedThreadPool().submit(searchUsbDeviceTask);
         searchUsbDeviceTask.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
