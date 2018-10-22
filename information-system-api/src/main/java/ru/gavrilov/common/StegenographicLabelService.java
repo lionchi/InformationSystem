@@ -22,9 +22,8 @@ public class StegenographicLabelService {
 
     private static String getLabel() {
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMyyHHmm");
-        String currentDateAndTime = simpleDateFormat.format(date);
-        return currentDateAndTime;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ddMMHHmm");
+        return simpleDateFormat.format(date);
     }
 
     private static String getLabelToBinary(String label) {

@@ -1,6 +1,7 @@
 package ru.gavrilov;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -76,15 +77,16 @@ public class MainApp extends Application {
             exit();
             return;
         }
-        Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Просканированы не все аппаратные ресурсы. " +
-                "Получить информацию необходимо на вкладках пк,cpu,hdd,интернет,видеокарта,дисплей");
+        Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Просканированы не все аппаратные ресурсы. Результирующий файл не будет создан. " +
+                "Получить информацию необходимо на вкладках пк,cpu,hdd,интернет,видеокарта,дисплей.");
         alertApproval.setTitle("WARNING!");
         alertApproval.setHeaderText(null);
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
         alertApproval.getButtonTypes().addAll(buttonTypeCancel);
         Optional<ButtonType> result = alertApproval.showAndWait();
         if (result.get() == ButtonType.OK) {
-            exit();
+            Platform.exit();
+            System.exit(0);
         } else {
             event.consume();
         }
