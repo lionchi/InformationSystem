@@ -76,8 +76,8 @@ public class MainApp extends Application {
             exit();
             return;
         }
-        Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Не вся основная информация была просканирована. Основная информация находится на вкладках ПК,CPU,HDD,Видеокарта " +
-                "Вы точно хотите закрыть приложение?");
+        Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Просканированы не все аппаратные ресурсы. " +
+                "Получить информацию необходимо на вкладках пк,cpu,hdd,интернет,видеокарта,дисплей");
         alertApproval.setTitle("WARNING!");
         alertApproval.setHeaderText(null);
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);

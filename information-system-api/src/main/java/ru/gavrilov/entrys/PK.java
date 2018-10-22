@@ -36,8 +36,9 @@ public class PK {
     }
 
     public boolean canSave() {
-        return ObjectUtils.allNotNull(versionBios, motherboardManufacturer, motherboardSerialNumber, cpu, hardDisks, videoCards)
-                && hardDisks.size() > 0 && videoCards.size() > 0;
+        return ObjectUtils.allNotNull(versionBios, motherboardManufacturer, motherboardSerialNumber, cpu,
+                hardDisks, videoCards, displays, networkInterfaces)
+                && hardDisks.size() > 0 && videoCards.size() > 0 && displays.size() > 0 && networkInterfaces.size() > 0;
     }
 
     public String getInventoryNumber() {
@@ -61,7 +62,7 @@ public class PK {
     }
 
     public void setSerialNumberPk(String serialNumberPk) {
-        if(!serialNumberPk.equals("Default string")) {
+        if (!serialNumberPk.equals("Default string")) {
             setLaptop(true);
         }
         this.serialNumberPk = serialNumberPk;

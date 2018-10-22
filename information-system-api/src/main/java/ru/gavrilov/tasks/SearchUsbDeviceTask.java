@@ -20,10 +20,11 @@ public class SearchUsbDeviceTask extends Task<FileManager> {
         HWDiskStore[] diskStores = hardwareAbstractionLayer.getDiskStores();
         String[] mas = getSerialNumberAndNameFolder().split(",");
         String serialNumber = mas[0];
-        String nameFolder = mas[1];
+        String serialNumberSsd = mas[1];
+        String nameFolder = mas[2];
         String mountPoint = "";
         for (HWDiskStore disk : diskStores) {
-            if (disk.getSerial().equals(serialNumber)) {
+            if (disk.getSerial().equals(serialNumber) || disk.getSerial().equals(serialNumberSsd)) {
                 HWPartition partitions = disk.getPartitions()[0];
                 mountPoint = partitions.getMountPoint();
                 break;
@@ -44,14 +45,15 @@ public class SearchUsbDeviceTask extends Task<FileManager> {
 
     private String getSerialNumberAndNameFolder() {
         Properties prop = new Properties();
-        String nameFolder = "", serialNumber = "";
+        String nameFolder = "", serialNumber = "", serialNumberSsd = "";
         try {
             prop.load(MainApp.class.getClassLoader().getResourceAsStream("app.properties"));
             serialNumber = prop.getProperty("serial.number");
+            serialNumberSsd = prop.getProperty("serial.number.ssd");
             nameFolder = prop.getProperty("name.folder");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return serialNumber + "," + nameFolder;
+        return serialNumber + "," + serialNumberSsd + "," + nameFolder;
     }
 }
