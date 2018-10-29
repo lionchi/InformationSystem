@@ -3,7 +3,6 @@ package ru.gavrilov.common;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class StegenographicLabelService {
 
@@ -36,21 +35,22 @@ public class StegenographicLabelService {
 
     private static String readFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();
-        try {
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNext()) {
-                String content = scanner.nextLine();
-                stringBuilder.append(content);
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(
+                new FileInputStream(file), "UTF8"))) {
+            int i;
+            while ((i = in.read()) != -1) {
+                stringBuilder.append((char) i);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         return stringBuilder.toString();
     }
 
     private static void writeResultInFile(String changeText, File file) throws IOException {
-        try (PrintWriter out = new PrintWriter(file)) {
-            out.println(changeText);
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(file), "utf-8"))) {
+            writer.write(changeText);
         }
     }
 

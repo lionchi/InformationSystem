@@ -12,8 +12,6 @@ import ru.gavrilov.entrys.PK;
 import ru.gavrilov.hardware.HWDiskStore;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.Executors;
 
 public class FileManager {
@@ -30,14 +28,6 @@ public class FileManager {
         this.mountPoint = mountPoint;
         this.nameFolder = nameFolder;
         this.folder = folder;
-    }
-
-    private void createFile() {
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH_mm_ss");
-        String currentDateAndTime = simpleDateFormat.format(date);
-        File createFile = new File(folder, currentDateAndTime);
-        setFile(createFile);
     }
 
     public void writeJson() {
