@@ -78,7 +78,7 @@ public class MainApp extends Application {
             return;
         }
         Alert alertApproval = new Alert(Alert.AlertType.WARNING, "Просканированы не все аппаратные ресурсы. Результирующий файл не будет создан. " +
-                "Получить информацию необходимо на вкладках пк,cpu,hdd,интернет,видеокарта,дисплей.");
+                "Получить информацию необходимо на всех имеющихся вкладках.");
         alertApproval.setTitle("WARNING!");
         alertApproval.setHeaderText(null);
         ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);

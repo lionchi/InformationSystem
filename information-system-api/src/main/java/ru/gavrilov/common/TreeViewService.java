@@ -14,7 +14,7 @@ import ru.gavrilov.software.OSFileStore;
 
 public final class TreeViewService {
 
-    public static  <T, C> void setOnMouseClickForTreeView(TreeView<T> treeView) {
+    public static <T, C> void setOnMouseClickForTreeView(TreeView<T> treeView) {
         treeView.setOnMouseClicked(event -> {
             if (event.getClickCount() >= 2) {
                 try {
@@ -23,7 +23,7 @@ public final class TreeViewService {
                     Stage stage = new Stage(StageStyle.TRANSPARENT);
                     AnchorPane parent = form.getParent();
                     InformationController controller = form.getController();
-                    applayMethodSet(cl,controller).applay(cl);
+                    applayMethodSet(cl, controller).applay(cl);
                     controller.setStage(stage);
                     Scene scene = new Scene(parent);
                     stage.setScene(scene);
@@ -40,12 +40,12 @@ public final class TreeViewService {
         });
     }
 
-    private static <C> String getFileName(C clazz){
+    private static <C> String getFileName(C clazz) {
         if (clazz instanceof HWDiskStore) {
             return "hardDisks_form.fxml";
-        } else if (clazz instanceof OSFileStore) {
+        } /*else if (clazz instanceof OSFileStore) {
             return "fileStore_form.fxml";
-        }
+        }*/
         return "";
     }
 
@@ -53,9 +53,9 @@ public final class TreeViewService {
         SiFunction<C> function = null;
         if (cl instanceof HWDiskStore) {
             function = obj -> informationController.setHardDisksController(obj);
-        } else if (cl instanceof OSFileStore) {
+        } /*else if (cl instanceof OSFileStore) {
             function = obj -> informationController.setFileStore(obj);
-        }
+        }*/
 
         return function;
     }

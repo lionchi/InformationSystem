@@ -3,13 +3,9 @@
 <?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -25,26 +21,7 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <TextArea fx:id="computerSystemText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab id="1" fx:id="fileSystemTab" text="Файловая система">
-              <content>
-                <AnchorPane fx:id="paneFileSystem" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="paneComputer" stylesheets="@../css/MyStyle.css">
-                     <children>
-                        <Button fx:id="fileSystemButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor></Button>
-                        <TreeView fx:id="treeViewFileSystem" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <styleClass>
-                              <String fx:value="arrow" />
-                              <String fx:value="tree-cell" />
-                           </styleClass></TreeView>
+                        <TextArea fx:id="computerSystemText" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -52,7 +29,7 @@
             <content>
               <AnchorPane fx:id="paneCpu" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="cpuText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" wrapText="true" />
+                        <TextArea fx:id="cpuText" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" wrapText="true" />
                         <Button fx:id="cpuButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию">
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -60,47 +37,12 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab id="3" fx:id="memoryTab" text="Процессы">
-              <content>
-                <AnchorPane fx:id="paneMemory" minHeight="0.0" minWidth="0.0" prefHeight="362.0" prefWidth="470.0">
-                     <children>
-                        <Button fx:id="memoryButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" stylesheets="@../css/MyStyle.css" text="Получить информацию" />
-                        <TableView fx:id="processesTable" layoutX="22.0" layoutY="51.0" prefHeight="240.0" prefWidth="452.0">
-                          <columns>
-                            <TableColumn fx:id="pid" prefWidth="60.0" text="PID" />
-                            <TableColumn fx:id="cpu" prefWidth="60.0" text="\%CPU" />
-                              <TableColumn fx:id="memory" prefWidth="60.0" text="\%MEM" />
-                              <TableColumn fx:id="vsz" prefWidth="75.0" text="VSZ " />
-                              <TableColumn fx:id="rss" prefWidth="75.0" text="RSS" />
-                              <TableColumn fx:id="name" prefWidth="120.0" text=" Name" />
-                          </columns>
-                        </TableView>
-                        <TextField fx:id="processesText" layoutX="575.0" layoutY="100.0" prefHeight="25.0" prefWidth="125.0" />
-                        <Label layoutX="491.0" layoutY="103.0" styleClass="mytext" text="Процессов:" />
-                        <TextField fx:id="memoryText" layoutX="574.0" layoutY="202.0" prefHeight="25.0" prefWidth="124.0" />
-                        <Label layoutX="513.0" layoutY="205.0" styleClass="mytext" text="Память:" />
-                        <Label layoutX="500.0" layoutY="258.0" styleClass="mytext" text="Swap used:" />
-                        <TextField fx:id="swapText" layoutX="575.0" layoutY="255.0" prefHeight="25.0" prefWidth="124.0" />
-                        <Label layoutX="506.0" layoutY="154.0" styleClass="mytext" text="Потоков:" />
-                        <TextField fx:id="threadsText" layoutX="574.0" layoutY="151.0" prefHeight="25.0" prefWidth="125.0" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
             <Tab id="4" fx:id="hardDisksTab" text="HDD">
               <content>
                 <AnchorPane fx:id="paneHardDisks" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="hardDisksButton" layoutX="318.0" layoutY="329.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
+                        <Button fx:id="hardDisksButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
                         <TreeView fx:id="treeViewDisks" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab id="5" fx:id="usbDevicesTab" text="Контроллеры USB">
-              <content>
-                <AnchorPane fx:id="paneUsb" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="usbDevicesButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
-                        <TreeView fx:id="treeView" layoutX="15.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -108,17 +50,8 @@
               <content>
                 <AnchorPane fx:id="paneNetwork" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="networkText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" wrapText="true" />
+                        <TextArea fx:id="networkText" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" wrapText="true" />
                         <Button fx:id="networkButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab id="7" fx:id="sensorsTab" text="Состояние ПК">
-              <content>
-                <AnchorPane fx:id="paneSensors" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="sensorsAndPSButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
-                        <TextArea fx:id="sensorsAndPSText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
                      </children></AnchorPane>
               </content>
             </Tab>
@@ -130,7 +63,7 @@
                                 <cursor>
                                     <Cursor fx:constant="HAND" />
                                 </cursor></Button>
-                            <TextArea fx:id="videoCardText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
+                            <TextArea fx:id="videoCardText" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" stylesheets="@../css/MyStyle.css" wrapText="true" />
                         </children></AnchorPane>
                 </content>
             </Tab>
@@ -138,7 +71,7 @@
             <content>
               <AnchorPane fx:id="paneDisplay" minHeight="0.0" minWidth="0.0" prefHeight="364.0" prefWidth="747.0" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="51.0">
                      <children>
-                        <TextArea fx:id="displayText" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
+                        <TextArea fx:id="displayText" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="751.0" />
                         <Button fx:id="displayButton" layoutX="327.0" layoutY="330.0" mnemonicParsing="false" styleClass="computerSystemButton" text="Получить информацию" />
                      </children></AnchorPane>
             </content>

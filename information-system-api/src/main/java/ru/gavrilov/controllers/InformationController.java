@@ -61,10 +61,10 @@ public class InformationController implements Controller {
         initFieldForHardDisks();
     }
 
-    public <C> void setFileStore(C fileStore) {
+    /*public <C> void setFileStore(C fileStore) {
         this.fileStore = (OSFileStore) fileStore;
         initFieldForFileStore();
-    }
+    }*/
 
     private void initFieldForHardDisks() {
         AtomicReference<String> type = new AtomicReference<>("/fs:FAT32");
@@ -124,7 +124,7 @@ public class InformationController implements Controller {
         });
     }
 
-    private void initFieldForFileStore() {
+    /*private void initFieldForFileStore() {
         name.setText(fileStore.getName());
         description.setText(fileStore.getDescription().isEmpty() ? "file system" : fileStore.getDescription());
         type.setText(fileStore.getType());
@@ -137,5 +137,5 @@ public class InformationController implements Controller {
         logicalVolume.setText(fileStore.getLogicalVolume());
         mount.setText(fileStore.getMount());
         okButton.setOnAction(event -> stage.close());
-    }
+    }*/
 }

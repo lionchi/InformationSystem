@@ -2,13 +2,9 @@ package ru.gavrilov.common;
 
 public enum TabEnum {
     CUMPUTER_SYSTEM("ПК"),
-    FILE_SYSTEM("Файловая система"),
     CPU("CPU"),
-    PROCESS("Процессы"),
     HDD("HDD"),
-    USB_CONTROLLERS("Контроллеры USB"),
     NETWORK("Интернет"),
-    STATUS_PK("Состояние ПК"),
     VIDEO_CARD("Видеокарта"),
     DISPLAY("Дисплей");
 
