@@ -5,10 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.gavrilov.SystemInfo;
 import ru.gavrilov.entrys.PK;
-import ru.gavrilov.hardware.Baseboard;
-import ru.gavrilov.hardware.ComputerSystem;
-import ru.gavrilov.hardware.Firmware;
-import ru.gavrilov.hardware.HardwareAbstractionLayer;
+import ru.gavrilov.hardware.*;
 import ru.gavrilov.software.OperatingSystem;
 import ru.gavrilov.software.OperatingSystemVersion;
 import ru.gavrilov.util.FormatUtil;
@@ -26,6 +23,7 @@ public class ComputerSystemTask extends Task<String> {
 
         ComputerSystem computerSystem = hardwareAbstractionLayer.getComputerSystem();
         OperatingSystemVersion operatingSystemVersion = operatingSystem.getVersion();
+        GlobalMemory memory = hardwareAbstractionLayer.getMemory();
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -38,6 +36,8 @@ public class ComputerSystemTask extends Task<String> {
         pk.setModelPk(computerSystem.getModel());
         stringBuilder.append("Серийный номер: " + computerSystem.getSerialNumber() + "\n");
         pk.setSerialNumberPk(computerSystem.getSerialNumber());
+        stringBuilder.append("Общий объем RAM: " + FormatUtil.formatBytes(memory.getTotal()) + "\n");
+        pk.setRam(FormatUtil.formatBytes(memory.getTotal()));
 
         Firmware firmware = computerSystem.getFirmware();
 

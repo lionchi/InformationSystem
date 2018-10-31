@@ -15,6 +15,7 @@ public class PK {
     private String serialNumberPk;
     private String modelPk;
     private String manufacture;
+    private String ram;
     private boolean isLaptop = false;
     //Motherboard
     private String versionBios;
@@ -186,5 +187,13 @@ public class PK {
 
     public void setVideoCards(ArrayList<VideoCard> videoCards) {
         this.videoCards = videoCards;
+    }
+
+    public String getRam() {
+        return ram;
+    }
+
+    public void setRam(String ram) {
+        this.ram = ram;
     }
 }
