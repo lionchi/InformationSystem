@@ -104,6 +104,22 @@ public class FileManager {
         }
     }
 
+    public static boolean isFileFound(String path, String fileName, String serialNumberSsd) throws IOException {
+        File f = new File(path);
+        File[] matchingFiles = f.listFiles((dir, name) -> name.equals(fileName));
+
+        StringBuilder builder = new StringBuilder();
+        if (matchingFiles != null && matchingFiles.length > 0) {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(matchingFiles[0])))) {
+                int i;
+                while ((i = in.read()) != -1) {
+                    builder.append((char) i);
+                }
+            }
+        }
+        return builder.toString().equals(MD5.crypt(serialNumberSsd));
+    }
+
     public String getMountPoint() {
         return mountPoint;
     }

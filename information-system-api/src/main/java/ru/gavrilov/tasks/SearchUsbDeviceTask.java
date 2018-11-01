@@ -19,16 +19,22 @@ public class SearchUsbDeviceTask extends Task<FileManager> {
     protected FileManager call() throws Exception {
         HWDiskStore[] diskStores = hardwareAbstractionLayer.getDiskStores();
         String[] mas = getSerialNumberAndNameFolder().split(",");
-        String serialNumber = mas[0];
+        String nameFile = mas[0];
         String serialNumberSsd = mas[1];
         String nameFolder = mas[2];
         String mountPoint = "";
+        boolean flag = true;
         for (HWDiskStore disk : diskStores) {
-            if (disk.getSerial().equals(serialNumber) || disk.getSerial().equals(serialNumberSsd)) {
-                HWPartition partitions = disk.getPartitions()[0];
-                mountPoint = partitions.getMountPoint();
-                break;
+            if (disk.getModel().contains("SCSI")) {
+                for (HWPartition hwPartition : disk.getPartitions()) {
+                    if (FileManager.isFileFound(hwPartition.getMountPoint(), nameFile, serialNumberSsd)) {
+                        mountPoint = hwPartition.getMountPoint();
+                        flag = false;
+                        break;
+                    }
+                }
             }
+            if (!flag) break;
         }
 
         FileManager fileManager = null;
@@ -45,15 +51,15 @@ public class SearchUsbDeviceTask extends Task<FileManager> {
 
     private String getSerialNumberAndNameFolder() {
         Properties prop = new Properties();
-        String nameFolder = "", serialNumber = "", serialNumberSsd = "";
+        String nameFolder = "", nameFile = "", serialNumberSsd = "";
         try {
             prop.load(MainApp.class.getClassLoader().getResourceAsStream("app.properties"));
-            serialNumber = prop.getProperty("serial.number");
+            nameFile = prop.getProperty("name.file");
             serialNumberSsd = prop.getProperty("serial.number.ssd");
             nameFolder = prop.getProperty("name.folder");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return serialNumber + "," + serialNumberSsd + "," + nameFolder;
+        return nameFile + "," + serialNumberSsd + "," + nameFolder;
     }
 }
