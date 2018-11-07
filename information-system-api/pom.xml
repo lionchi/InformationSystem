@@ -17,8 +17,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
-
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -62,6 +60,11 @@
         <dependency>
             <groupId>ru.gavrilov</groupId>
             <artifactId>information-system-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.gavrilov</groupId>
+            <artifactId>information-system-security</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

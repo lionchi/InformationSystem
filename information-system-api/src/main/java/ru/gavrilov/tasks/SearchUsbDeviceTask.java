@@ -1,41 +1,24 @@
 package ru.gavrilov.tasks;
 
 import javafx.concurrent.Task;
-import ru.gavrilov.HWPartition;
 import ru.gavrilov.MainApp;
-import ru.gavrilov.SystemInfo;
-import ru.gavrilov.common.FileManager;
-import ru.gavrilov.hardware.HWDiskStore;
-import ru.gavrilov.hardware.HardwareAbstractionLayer;
+import ru.gavrilov.Security;
+import ru.gavrilov.common.FileManager;;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
 public class SearchUsbDeviceTask extends Task<FileManager> {
-    private static final HardwareAbstractionLayer hardwareAbstractionLayer = SystemInfo.INSTANCE.getHardware();
 
     @Override
     protected FileManager call() throws Exception {
-        HWDiskStore[] diskStores = hardwareAbstractionLayer.getDiskStores();
-        String[] mas = getSerialNumberAndNameFolder().split(",");
-        String nameFile = mas[0];
-        String serialNumberSsd = mas[1];
-        String nameFolder = mas[2];
-        String mountPoint = "";
-        boolean flag = true;
-        for (HWDiskStore disk : diskStores) {
-            if (disk.getModel().contains("SCSI")) {
-                for (HWPartition hwPartition : disk.getPartitions()) {
-                    if (FileManager.isFileFound(hwPartition.getMountPoint(), nameFile, serialNumberSsd)) {
-                        mountPoint = hwPartition.getMountPoint();
-                        flag = false;
-                        break;
-                    }
-                }
-            }
-            if (!flag) break;
+        String nameFolder = getNameFolder();
+        if (!Security.checkLicenseForIS()) {
+            return null;
         }
+
+        String mountPoint = Security.getDir();
 
         FileManager fileManager = null;
         if (!mountPoint.isEmpty()) {
@@ -49,17 +32,15 @@ public class SearchUsbDeviceTask extends Task<FileManager> {
     }
 
 
-    private String getSerialNumberAndNameFolder() {
+    private String getNameFolder() {
         Properties prop = new Properties();
-        String nameFolder = "", nameFile = "", serialNumberSsd = "";
+        String nameFolder = "";
         try {
             prop.load(MainApp.class.getClassLoader().getResourceAsStream("app.properties"));
-            nameFile = prop.getProperty("name.file");
-            serialNumberSsd = prop.getProperty("serial.number.ssd");
             nameFolder = prop.getProperty("name.folder");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return nameFile + "," + serialNumberSsd + "," + nameFolder;
+        return nameFolder;
     }
 }

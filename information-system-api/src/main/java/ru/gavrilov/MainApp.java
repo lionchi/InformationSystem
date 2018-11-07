@@ -18,10 +18,12 @@ import ru.gavrilov.common.Guard;
 import ru.gavrilov.common.GuiForm;
 import ru.gavrilov.controllers.ErrorStartAppFormController;
 import ru.gavrilov.controllers.MainController;
+import ru.gavrilov.controllers.SelectDeviceController;
 import ru.gavrilov.controllers.SerialNumberFormController;
 import ru.gavrilov.entrys.PK;
 import ru.gavrilov.tasks.SearchUsbDeviceTask;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.concurrent.Executors;
@@ -38,38 +40,51 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        configPrimary(primaryStage);
-        SearchUsbDeviceTask searchUsbDeviceTask = new SearchUsbDeviceTask();
-        Executors.newCachedThreadPool().submit(searchUsbDeviceTask);
-        searchUsbDeviceTask.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
-            try {
-                FileManager resultFileManager = searchUsbDeviceTask.getValue();
-                fileManager.setNameFolder(resultFileManager.getNameFolder());
-                fileManager.setMountPoint(resultFileManager.getMountPoint());
-                fileManager.setFolder(resultFileManager.getFolder());
-                fileManager.setFile(resultFileManager.getFile());
-            } catch (Exception e) {
-                GuiForm<AnchorPane, ErrorStartAppFormController> loader = new GuiForm("error_start_app_form.fxml");
-                AnchorPane root = loader.getParent();
-                ErrorStartAppFormController controller = loader.getController();
-                primaryStage.initStyle(StageStyle.UNDECORATED);
-                controller.setStage(primaryStage);
-                primaryStage.setScene(new Scene(root));
-                primaryStage.centerOnScreen();
-                primaryStage.show();
-                goodStartApp = false;
-            }
-            if (goodStartApp) {
-                GuiForm<AnchorPane, MainController> loader = new GuiForm("main_form.fxml");
-                AnchorPane root = loader.getParent();
-                MainController controller = loader.getController();
-                controller.setStage(primaryStage);
-                primaryStage.setScene(new Scene(root));
-                primaryStage.centerOnScreen();
-                primaryStage.show();
-            }
-        });
+    public void start(Stage primaryStage) throws FileNotFoundException {
+        Security.initPropertiesHelper(MainApp.class);
+        if (Security.checkFirstStart()) {
+            GuiForm<AnchorPane, SelectDeviceController> loader = new GuiForm<>("select_device_form.fxml");
+            AnchorPane anchorPane = loader.getParent();
+            SelectDeviceController selectDeviceController = loader.getController();
+            selectDeviceController.setStage(primaryStage);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setScene(new Scene(anchorPane));
+            primaryStage.centerOnScreen();
+            primaryStage.show();
+            new Alert(Alert.AlertType.WARNING, "После выбора устройства программа необходимо перезапустить").showAndWait();
+        } else {
+            configPrimary(primaryStage);
+            SearchUsbDeviceTask searchUsbDeviceTask = new SearchUsbDeviceTask();
+            Executors.newCachedThreadPool().submit(searchUsbDeviceTask);
+            searchUsbDeviceTask.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, event -> {
+                try {
+                    FileManager resultFileManager = searchUsbDeviceTask.getValue();
+                    fileManager.setNameFolder(resultFileManager.getNameFolder());
+                    fileManager.setMountPoint(resultFileManager.getMountPoint());
+                    fileManager.setFolder(resultFileManager.getFolder());
+                    fileManager.setFile(resultFileManager.getFile());
+                } catch (Exception e) {
+                    GuiForm<AnchorPane, ErrorStartAppFormController> loader = new GuiForm<>("error_start_app_form.fxml");
+                    AnchorPane root = loader.getParent();
+                    ErrorStartAppFormController controller = loader.getController();
+                    primaryStage.initStyle(StageStyle.UNDECORATED);
+                    controller.setStage(primaryStage);
+                    primaryStage.setScene(new Scene(root));
+                    primaryStage.centerOnScreen();
+                    primaryStage.show();
+                    goodStartApp = false;
+                }
+                if (goodStartApp) {
+                    GuiForm<AnchorPane, MainController> loader = new GuiForm<>("main_form.fxml");
+                    AnchorPane root = loader.getParent();
+                    MainController controller = loader.getController();
+                    controller.setStage(primaryStage);
+                    primaryStage.setScene(new Scene(root));
+                    primaryStage.centerOnScreen();
+                    primaryStage.show();
+                }
+            });
+        }
     }
 
     private void closeApp(WindowEvent event) {
@@ -93,7 +108,7 @@ public class MainApp extends Application {
     }
 
     private void exit() {
-        GuiForm<AnchorPane, SerialNumberFormController> loader = new GuiForm("serial_number_form.fxml");
+        GuiForm<AnchorPane, SerialNumberFormController> loader = new GuiForm<>("serial_number_form.fxml");
         Stage stage = new Stage(StageStyle.TRANSPARENT);
         AnchorPane root = loader.getParent();
         SerialNumberFormController controller = loader.getController();
@@ -109,7 +124,7 @@ public class MainApp extends Application {
         URL url = MainApp.class.getClassLoader().getResource("icons/market.png");
         Guard.notNull(url, "Icon file not found!");
         primaryStage.getIcons().addAll(new Image(url.toString()));
-        primaryStage.setTitle("Информация о системе");
+        primaryStage.setTitle("Инвентаризация аппартаного обеспечения");
         primaryStage.setOnCloseRequest(this::closeApp);
         mainStage = primaryStage;
     }

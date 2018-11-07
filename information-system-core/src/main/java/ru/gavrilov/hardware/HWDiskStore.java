@@ -198,7 +198,6 @@ public class HWDiskStore implements Serializable, Comparable<HWDiskStore> {
 
     @Override
     public String toString() {
-        return getName();
-
+        return getModel() + " " + getSerial().trim();
     }
 }
