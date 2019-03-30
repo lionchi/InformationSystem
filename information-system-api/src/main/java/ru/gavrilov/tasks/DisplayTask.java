@@ -19,6 +19,7 @@ public class DisplayTask extends Task<String> {
     @Override
     protected String call() throws Exception {
         LOG.info("Checking Displays...");
+        long start = System.currentTimeMillis();
         Display[] displays = hardwareAbstractionLayer.getDisplays();
         StringBuilder stringBuilder = new StringBuilder("Дисплеи:");
         ArrayList<ru.gavrilov.entrys.Display> listDisplays = new ArrayList<>();
@@ -29,8 +30,9 @@ public class DisplayTask extends Task<String> {
             i++;
             listDisplays.add(new ru.gavrilov.entrys.Display(EdidUtil.getManufId(), EdidUtil.getName(), EdidUtil.getDiagonal(), EdidUtil.getDisplayId()));
         }
-
         pk.setDisplays(listDisplays);
+        long end = System.currentTimeMillis();
+        System.out.println("Время сбора информации о мониторах подключенных к персональном компьютеру  в милисекундах равно " + (end-start));
         return stringBuilder.toString();
     }
 }

@@ -22,7 +22,7 @@ public class CpuTask extends Task<String>{
     @Override
     protected String call() throws Exception {
         LOG.info("Checking cpu...");
-
+        long start = System.currentTimeMillis();
         CentralProcessor processor = hardwareAbstractionLayer.getProcessor();
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -61,7 +61,8 @@ public class CpuTask extends Task<String>{
             procCpu.append(String.format(" %.1f%%", avg * 100));
         }
         stringBuilder.append(procCpu.toString() + "\n");
-
+        long end = System.currentTimeMillis();
+        System.out.println("Время сбора информации о центральном процессоре в милисекундах равно " + (end-start));
         return  stringBuilder.toString();
     }
 

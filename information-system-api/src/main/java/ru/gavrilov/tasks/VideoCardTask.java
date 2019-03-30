@@ -19,6 +19,7 @@ public class VideoCardTask extends Task<String> {
     @Override
     protected String call() throws Exception {
         try {
+            long start = System.currentTimeMillis();
             String filePath = "./foo.txt";
             ProcessBuilder pb = new ProcessBuilder("cmd.exe", "/c", "dxdiag", "/t", filePath);
             Process p = pb.start();
@@ -43,6 +44,8 @@ public class VideoCardTask extends Task<String> {
             for (int i = 0; i < pk.getVideoCards().size(); i++) {
                 stringBuilder.append(String.format("%s) %s", i + 1, pk.getVideoCards().get(i).toString())).append("\n");
             }
+            long end = System.currentTimeMillis();
+            System.out.println("Время сбора информации об видеокартах  в милисекундах равно " + (end-start));
             return stringBuilder.toString();
         } catch (IOException | InterruptedException ex) {
             ex.printStackTrace();

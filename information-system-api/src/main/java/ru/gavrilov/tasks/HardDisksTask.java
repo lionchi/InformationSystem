@@ -24,6 +24,7 @@ public class HardDisksTask extends Task<TreeItem> {
     @Override
     protected TreeItem call() throws Exception {
         LOG.info("Checking Disks...");
+        long start = System.currentTimeMillis();
         TreeItem rootItem = new TreeItem("Hard Disks");
         List<TreeItem> contents = new ArrayList<>();
         HWDiskStore[] diskStores = hardwareAbstractionLayer.getDiskStores();
@@ -50,6 +51,8 @@ public class HardDisksTask extends Task<TreeItem> {
 
         rootItem.getChildren().addAll(contents);
         pk.setHardDisks(disks);
+        long end = System.currentTimeMillis();
+        System.out.println("Время сбора информации об информационных носителей  в милисекундах равно " + (end-start));
         return rootItem;
     }
 }

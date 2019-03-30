@@ -21,12 +21,15 @@ public class SerialNumberFormController implements Controller {
 
     @FXML
     private void initialize() {
+        long start = System.currentTimeMillis();
         okButton.setOnAction(event -> {
             if ((!inventoryNumber.getText().equals("") && !locationField.getText().equals(""))
                     && (inventoryNumber.getText() != null && locationField.getText() != null)) {
                 pk.setInventoryNumber(inventoryNumber.getText());
                 pk.setLocation(locationField.getText().toUpperCase());
                 fileManager.writeJson();
+                long end = System.currentTimeMillis();
+                System.out.println("Время создания результирующего файла в милисекундах равно " + (end - start));
                 Platform.exit();
                 System.exit(0);
             } else {

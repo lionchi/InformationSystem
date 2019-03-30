@@ -20,7 +20,7 @@ public class ComputerSystemTask extends Task<String> {
     @Override
     protected String call() throws Exception {
         LOG.info("Checking computer system...");
-
+        long start = System.currentTimeMillis();
         ComputerSystem computerSystem = hardwareAbstractionLayer.getComputerSystem();
         OperatingSystemVersion operatingSystemVersion = operatingSystem.getVersion();
         GlobalMemory memory = hardwareAbstractionLayer.getMemory();
@@ -59,7 +59,8 @@ public class ComputerSystemTask extends Task<String> {
         stringBuilder.append("  версия: " + baseboard.getVersion() + "\n");
         stringBuilder.append("  серийный номер: " + baseboard.getSerialNumber() + "\n");
         pk.setMotherboardSerialNumber(baseboard.getSerialNumber());
-
+        long end = System.currentTimeMillis();
+        System.out.println("Время сбора общей информации о персональном компьютере  в милисекундах равно " + (end-start));
         return stringBuilder.toString();
     }
 }

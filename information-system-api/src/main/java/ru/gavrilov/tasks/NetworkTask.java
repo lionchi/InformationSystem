@@ -24,6 +24,7 @@ public class NetworkTask extends Task<String> {
     @Override
     protected String call() throws Exception {
         LOG.info("Checking Network interfaces...");
+        long start = System.currentTimeMillis();
         NetworkIF[] networkIFs = hardwareAbstractionLayer.getNetworkIFs();
         StringBuilder stringBuilder = new StringBuilder("Сетевые интерфейсы:" + "\n");
         ArrayList<NetworkInterface> networkInterfaces = new ArrayList<>();
@@ -51,6 +52,8 @@ public class NetworkTask extends Task<String> {
 
         setNetworkParameters(stringBuilder);
         pk.setNetworkInterfaces(networkInterfaces);
+        long end = System.currentTimeMillis();
+        System.out.println("Время сбора информации об сетевых интерфейсах  в милисекундах равно " + (end-start));
         return stringBuilder.toString();
     }
 

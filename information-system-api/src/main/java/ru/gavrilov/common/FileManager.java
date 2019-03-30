@@ -68,6 +68,7 @@ public class FileManager {
     public static void createBatch(String drive, String speed, String type, String name, ProgressBar progressBar,
                                    Button okButton, Button startFormattedButton, TextField newName) {
         try {
+            long start = System.currentTimeMillis();
             progressBar.setProgress(-1.0f);
             okButton.setDisable(true);
             startFormattedButton.setDisable(true);
@@ -78,7 +79,7 @@ public class FileManager {
             bw.close();
             Executors.newCachedThreadPool().submit(() -> {
                 try {
-                    executeBatch(progressBar, okButton, startFormattedButton, newName);
+                    executeBatch(progressBar, okButton, startFormattedButton, newName, start);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -87,13 +88,15 @@ public class FileManager {
         }
     }
 
-    private static void executeBatch(ProgressBar progressBar, Button okButton, Button startFormattedButton, TextField newName) throws InterruptedException {
+    private static void executeBatch(ProgressBar progressBar, Button okButton, Button startFormattedButton, TextField newName, long start) throws InterruptedException {
         Process p;
         try {
             p = Runtime.getRuntime().exec("Phoenix.bat");
             p.waitFor();
             File f1 = new File("Phoenix.bat");
             f1.delete();
+            long end = System.currentTimeMillis();
+            System.out.println("Время форматирования информационного носителя в милисекундах равно " + (end - start));
             Platform.runLater(() -> {
                 okButton.setDisable(false);
                 startFormattedButton.setDisable(false);
